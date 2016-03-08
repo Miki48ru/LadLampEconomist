@@ -11,6 +11,7 @@
     <string name="rates_title">Расчет тарифов</string>
     <string name="rate1">Тариф №1</string>
     <string name="text1">Стоимость тарифа, руб/час</string>
+    <string name="text2">Среднее кол-во часов работы в день \n по тарифу 1. час:</string>
     <string-array  name = "spinner1" >
         <item> 1 </item>
         <item> 2 </item>
@@ -23,4 +24,17 @@
         <item> 9 </item>
         <item> 10 </item>
     </string-array>
+    <string-array  name = "spinner2" >
+        <item> 1 </item>
+        <item> 2 </item>
+        <item> 3 </item>
+        <item> 4 </item>
+        <item> 5 </item>
+        <item> 6 </item>
+        <item> 7 </item>
+        <item> 8 </item>
+        <item> 9 </item>
+        <item> 10 </item>
+    </string-array>
+
 </resources>
