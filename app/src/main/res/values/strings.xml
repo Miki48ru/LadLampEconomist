@@ -12,6 +12,7 @@
     <string name="rate1">Тариф №1</string>
     <string name="text1">Стоимость тарифа, руб/час</string>
     <string name="text2">Среднее кол-во часов работы в день \n по тарифу 1. час:</string>
+    <string name="text3"
     <string-array  name = "spinner1" >
         <item> 1 </item>
         <item> 2 </item>
