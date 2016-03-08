@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RatesActivity"
-            android:label="@string/rates_title"></activity>
+            android:label="@string/rates_title"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
