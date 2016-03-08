@@ -22,14 +22,14 @@ public class SpinnerFiller {
     }
 
     public List<Integer> getSpinner2() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
             spinner2.add(i);
         }
         return spinner2;
     }
 
     public List<Integer> getSpinner3() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 24; i++) {
             spinner3.add(i);
         }
         return spinner3;
