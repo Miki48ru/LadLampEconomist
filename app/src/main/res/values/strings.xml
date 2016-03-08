@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">LadLampEconomist</string>
+    <string name="greeting"><u>Приветствие</u></string>
+    <string name="basicGreetingText"> \t Во всех средствах массовой информации нам неустанно говорят, как здорово использовать светодиодные лампы вместо ламп накаливания и самое главное, что это очень выгодно. Но придя в магазин и сравнивая ценны на «обычную» лампу и светодиодную, невольно задаешься вопросом, а так ли это выгодно? Когда окупится светодиодная лампа?
+\n \n \t Наша программа поможет Вам определиться с выбором, показав какую сумму вы сможете сэкономить, использую светодиодные лампы. Для этого нужно будет ввести данные по вашим тарифам на электроэнергию, сделать это можно заранее дома, и информацию по лампам, эту информацию можно вводить уже непосредственно в магазине, дабы окончательно определиться с выбором.
+И так, приступим?</string>
+    <string name="start_button">Начать!</string>
+    <string name="title_activity_rates">RatesActivity</string>
+    <string name="button_ago">Назад</string>
+    <string name="button_forward">Вперед</string>
+    <string name="rates_title">Расчет тарифов</string>
+    <string name="rate1">Тариф №1</string>
+    <string name="text1">Стоимость тарифа, руб/час</string>
+    <string-array  name = "spinner1" >
+        <item> 1 </item>
+        <item> 2 </item>
+        <item> 3 </item>
+        <item> 4 </item>
+        <item> 5 </item>
+        <item> 6 </item>
+        <item> 7 </item>
+        <item> 8 </item>
+        <item> 9 </item>
+        <item> 10 </item>
+    </string-array>
 </resources>
