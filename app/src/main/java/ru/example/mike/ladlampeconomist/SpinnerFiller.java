@@ -16,7 +16,7 @@ public class SpinnerFiller {
 
 
     public static List<Integer> getSpinnerHours() {
-        return filler(spinnerHours, 24, true);
+        return filler(spinnerHours, 24, false);
     }
 
     public static List<Integer> getSpinnerOne() {
@@ -24,7 +24,7 @@ public class SpinnerFiller {
     }
 
     public static List<Integer> getSpinnerTwo() {
-        return filler(spinnerTwo, 100, false);
+        return filler(spinnerTwo, 100, true);
     }
 
 
