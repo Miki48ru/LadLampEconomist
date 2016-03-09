@@ -9,30 +9,31 @@ import java.util.List;
 public class SpinnerFiller {
 
 
-    private List<Integer> spinner1 = new ArrayList<>();
-    private List<Integer> spinner2 = new ArrayList<>();
-    private List<Integer> spinner3 = new ArrayList<>();
 
-    public List<Integer> getSpinner1() {
-        for (int i = 0; i < 50; i++) {
-            spinner1.add(i);
-        }
+    private static List<Integer> spinnerOne = new ArrayList<>();
+    private static List<Integer> spinnerTwo = new ArrayList<>(); //TODO: перевести "копейку"
+    private static List<Integer> spinnerHours = new ArrayList<>();
 
-        return spinner1;
+
+    public static List<Integer> getSpinnerHours() {
+        return filler(spinnerHours, 24, true);
     }
 
-    public List<Integer> getSpinner2() {
-        for (int i = 0; i < 100; i++) {
-            spinner2.add(i);
-        }
-        return spinner2;
+    public static List<Integer> getSpinnerOne() {
+        return filler(spinnerOne, 50, true);
     }
 
-    public List<Integer> getSpinner3() {
-        for (int i = 0; i < 24; i++) {
-            spinner3.add(i);
-        }
-        return spinner3;
+    public static List<Integer> getSpinnerTwo() {
+        return filler(spinnerTwo, 100, false);
     }
 
+
+    private static List<Integer> filler(List<Integer> filling, int count, boolean includeLast){
+        count = includeLast ? count : count - 1;
+
+        for (int i = 1; i <= count; i++) {
+            filling.add(i);
+        }
+        return filling;
+    }
 }
