@@ -113,10 +113,59 @@
             android:layout_centerHorizontal="true" />
     </TableRow>
 
+    <TableRow
+        android:id="@+id/tableRow7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/text5"
+        android:id="@+id/textView5"
+            android:gravity="center"
+            android:layout_below="@+id/textView3"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRow8"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text6"
+        android:id="@+id/textView6"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:layout_span="2" />
+
+    </TableRow>
+
+    <TableRow>
+        android:id="@+id/tableRow9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/rate2"
+            android:layout_column="0" />
+       
+
+    </TableRow>
 
 
     <TableRow>
-        android:id="@+id/tableRow6"
+        android:id="@+id/tableRow8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -145,6 +194,9 @@
             android:layout_marginEnd="48dp"
             android:onClick="onClickForward" />
     </TableRow>
+
+
+
 
 </TableLayout>
 
