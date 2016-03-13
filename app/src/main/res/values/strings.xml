@@ -13,29 +13,6 @@
     <string name="text1">Стоимость тарифа, руб/час</string>
     <string name="text2">Среднее кол-во часов работы в день \n по тарифу 1. час:</string>
     <string name="text3">Кол-во отработанных часов за год по Тарифу 1: </string>
-    <string-array  name = "spinner1" >
-        <item> 1 </item>
-        <item> 2 </item>
-        <item> 3 </item>
-        <item> 4 </item>
-        <item> 5 </item>
-        <item> 6 </item>
-        <item> 7 </item>
-        <item> 8 </item>
-        <item> 9 </item>
-        <item> 10 </item>
-    </string-array>
-    <string-array  name = "spinner2" >
-        <item> 1 </item>
-        <item> 2 </item>
-        <item> 3 </item>
-        <item> 4 </item>
-        <item> 5 </item>
-        <item> 6 </item>
-        <item> 7 </item>
-        <item> 8 </item>
-        <item> 9 </item>
-        <item> 10 </item>
-    </string-array>
+    <string name="text4">Кол-во отработанных часов за год по Тарифу 1: </string>
 
 </resources>
