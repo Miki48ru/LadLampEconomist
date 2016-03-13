@@ -159,7 +159,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/rate2"
             android:layout_column="0" />
-       
+
 
     </TableRow>
 
