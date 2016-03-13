@@ -16,11 +16,13 @@ public class RatesActivity extends AppCompatActivity {
     final private static List<Integer> spinnerOne = new ArrayList<>();
     final private static List<Integer> spinnerTwo = new ArrayList<>(); //TODO: перевести "копейку"
     final private static List<Integer> spinnerHours = new ArrayList<>();
+
+
     static {
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 50; i++) {
             spinnerOne.add(i);
         }
-        for (int i = 1; i <= 50; i++) {
+        for (int i = 1; i <= 100; i++) {
             spinnerTwo.add(i);
         }
         for (int i = 1; i <= 24; i++) {
