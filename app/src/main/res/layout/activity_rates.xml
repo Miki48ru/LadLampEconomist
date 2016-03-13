@@ -56,20 +56,18 @@
             android:id = "@+id/spinnerOne"
             android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/spinner1"/>
+            android:layout_weight="1" />
         <Spinner
             android:id = "@+id/spinnerTwo"
             android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/spinner2"/>
+            android:layout_weight="1" />
 
 
     </TableRow>
 
     <TableRow
-        android:id="@+id/tableRow5"
+        android:id="@+id/tableRow4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -86,7 +84,7 @@
     </TableRow>
 
     <TableRow>
-        android:id="@+id/tableRow4"
+        android:id="@+id/tableRow5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -94,9 +92,25 @@
             android:id = "@+id/spinnerHours"
             android:layout_width = "match_parent"
             android:layout_height = "wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/spinner2"/>
+            android:layout_weight="1" />
 
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/text3"
+            android:gravity="center"
+            android:layout_span="2"
+            android:id="@+id/textView3"
+            android:layout_below="@+id/textViewRate1"
+            android:layout_centerHorizontal="true" />
     </TableRow>
 
 
