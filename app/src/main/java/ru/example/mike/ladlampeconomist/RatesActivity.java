@@ -6,15 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RatesActivity extends AppCompatActivity {
 
-    private static List<Integer> spinnerOne = new ArrayList<>();
-    private static List<Integer> spinnerTwo = new ArrayList<>(); //TODO: перевести "копейку"
-    private static List<Integer> spinnerHours = new ArrayList<>();
+    final private static List<Integer> spinnerOne = new ArrayList<>();
+    final private static List<Integer> spinnerTwo = new ArrayList<>(); //TODO: перевести "копейку"
+    final private static List<Integer> spinnerHours = new ArrayList<>();
     static {
         for (int i = 1; i <= 100; i++) {
             spinnerOne.add(i);
@@ -34,6 +35,33 @@ public class RatesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rates);
 
+        adapterSpinnerOne();
+        adapterSpinnerTwo();
+        adapterSpinnerHours();
+
+    }
+
+    public void adapterSpinnerOne(){
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerOne);
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
+                android.R.layout.simple_spinner_item, spinnerOne);
+        ((ArrayAdapter<Integer>)spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+    }
+
+    public void adapterSpinnerTwo(){
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerTwo);
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
+                android.R.layout.simple_spinner_item, spinnerTwo);
+        ((ArrayAdapter<Integer>)spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+    }
+    public void adapterSpinnerHours(){
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerHours);
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
+                android.R.layout.simple_spinner_item, spinnerHours);
+        ((ArrayAdapter<Integer>)spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
     }
 
 
