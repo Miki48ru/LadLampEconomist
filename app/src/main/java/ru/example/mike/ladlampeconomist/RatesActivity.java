@@ -22,13 +22,14 @@ public class RatesActivity extends AppCompatActivity {
         for (int i = 1; i <= 50; i++) {
             spinnerOne.add(i);
         }
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 99; i++) {
             spinnerTwo.add(i);
         }
         for (int i = 1; i <= 24; i++) {
             spinnerHours.add(i);
         }
     }
+    
 
 
 
