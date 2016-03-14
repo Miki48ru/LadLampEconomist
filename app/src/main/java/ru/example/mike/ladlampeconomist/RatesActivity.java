@@ -83,12 +83,10 @@ public class RatesActivity extends AppCompatActivity {
         spinnerHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                int selected1 = Integer.valueOf(spinnerRub.getSelectedItem().toString());
-                int selected2 = Integer.valueOf(spinnerKopeck.getSelectedItem().toString());
-                int selected3 = Integer.valueOf(spinnerHour.getSelectedItem().toString());
-                Log.d("value ", "selected3 = " + spinnerHour.getSelectedItem().toString());
-                result = (selected1 + (selected2 / 100)) * selected3;
+                result = (selected1+(selected2/100)) * selected3;
                 textView.setText(result);
+                Log.d(LOG_TAG, "itemClick: position = " + position + ", id = "
+                        + id);
             }
 
             @Override
