@@ -19,44 +19,19 @@ public class TestSpinners extends Activity {
 
 
     Spinner spinner1 = (Spinner) findViewById(R.id.spinnerOne);
-    Integer selected1 = spinner1. getSelectedItemPosition();
+    Integer selected1 = spinner1.getSelectedItemPosition();
 
     Spinner spinner2 = (Spinner) findViewById(R.id.spinnerTwo);
-    Integer selected2 = spinner2. getSelectedItemPosition();
+    Integer selected2 = spinner2.getSelectedItemPosition();
 
     Spinner spinner3 = (Spinner) findViewById(R.id.spinnerHours);
-    Integer selected3 = spinner3. getSelectedItemPosition();
+    Integer selected3 = spinner3.getSelectedItemPosition();
 
-    public int moneTime(){
-        int result = (selected1+(selected2/100)) * selected3;
+    public int moneTime() {
+        int result = (selected1 + (selected2 / 100)) * selected3;
         return result;
     }
-
 }
-
-    public void adapterSpinnerHours() {
-
-        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
-                android.R.layout.simple_spinner_item, spinnerHours);
-        ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerHour.setAdapter(spinnerAdapter);
-        spinnerHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                int selected1 = Integer.valueOf(spinnerRub.getSelectedItem().toString());
-                int selected2 = Integer.valueOf(spinnerKopeck.getSelectedItem().toString());
-                int selected3 = Integer.valueOf(spinnerHour.getSelectedItem().toString());
-                Log.d("value ", "selected3 = " + spinnerHour.getSelectedItem().toString());
-                result = (selected1 + (selected2 / 100)) * selected3;
-                textView.setText(result);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
 
 
