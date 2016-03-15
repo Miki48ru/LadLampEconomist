@@ -17,18 +17,19 @@ import java.util.List;
 
 public class RatesActivity extends AppCompatActivity {
 
-    final private static List<Integer> spinnerOne = new ArrayList<>();
-    final private static List<Integer> spinnerTwo = new ArrayList<>(); //TODO: перевести "копейку"
-    final private static List<Integer> spinnerHours = new ArrayList<>();
-    final TextView textView = (TextView)findViewById(R.id.textView5);
-    Spinner spinnerRub = (Spinner) findViewById(R.id.spinnerOne);
-    Spinner spinnerKopeck = (Spinner) findViewById(R.id.spinnerTwo);
-    Spinner spinnerHour = (Spinner) findViewById(R.id.spinnerHours);
+    private static List<Integer> spinnerOne = new ArrayList<>();
+    private static List<Integer> spinnerTwo = new ArrayList<>(); //TODO: перевести "копейку"
+    private static List<Integer> spinnerHours = new ArrayList<>();
+    TextView textView;
+    Spinner spinnerRub;
+    Spinner spinnerKopeck;
+    Spinner spinnerHour;
     private int result;
-    private Integer selected1 = (Integer) spinnerRub. getSelectedItem();
-    private Integer selected2 = (Integer) spinnerKopeck. getSelectedItem();
-    private Integer selected3 = (Integer) spinnerHour. getSelectedItem();
+    private Integer selected1;
+    private Integer selected2;
+    private Integer selected3;
     final String LOG_TAG = "myLogs";
+
 
 
 
@@ -52,9 +53,20 @@ public class RatesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rates);
 
+        textView = (TextView)findViewById(R.id.textView5);
+
+        Spinner spinnerRub = (Spinner) findViewById(R.id.spinnerOne);
+        Spinner spinnerKopeck = (Spinner) findViewById(R.id.spinnerTwo);
+        Spinner spinnerHour = (Spinner) findViewById(R.id.spinnerHours);
+
+        selected1 = (int) spinnerRub.getSelectedItem();
+        selected2 = (int) spinnerKopeck.getSelectedItem();
+        selected3 = (int) spinnerHour.getSelectedItem();
+
         adapterSpinnerOne();
         adapterSpinnerTwo();
         adapterSpinnerHours();
+
 
 
     }
@@ -83,7 +95,11 @@ public class RatesActivity extends AppCompatActivity {
         spinnerHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                result = (selected1+(selected2/100)) * selected3;
+                if(selected1 == null && selected2 == null && selected3 == null) {
+                    result = 0;
+                } else {
+                    result = (selected1+(selected2/100)) * selected3;
+                }
                 textView.setText(result);
                 Log.d(LOG_TAG, "itemClick: position = " + position + ", id = "
                         + id);
@@ -95,6 +111,8 @@ public class RatesActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 
