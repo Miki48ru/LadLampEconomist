@@ -21,20 +21,15 @@ public class RatesActivity extends AppCompatActivity {
     private static List<Integer> spinnerTwo = new ArrayList<>(); //TODO: перевести "копейку"
     private static List<Integer> spinnerHours = new ArrayList<>();
     TextView textView;
-    Spinner spinnerRub;
-    Spinner spinnerKopeck;
-    Spinner spinnerHour;
-    private int result;
-    private Integer selected1;
-    private Integer selected2;
-    private Integer selected3;
+    Spinner spinnerRub; //вот эти спинеры
+    Spinner spinnerKopeck; //вот эти спинеры
+    Spinner spinnerHour;//вот эти спинеры
+    private int resultTimeYears; // руезультат с точкой 4.767
+    private int selected3; //целое число
     final String LOG_TAG = "myLogs";
 
-
-
-
     static {
-        for (int i = 1; i <= 50; i++) {
+        for (int i = 1; i <= 50; i++) {  //так инициализировать списки не стоит
             spinnerOne.add(i);
         }
         for (int i = 1; i <= 99; i++) {
@@ -45,62 +40,73 @@ public class RatesActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rates);
 
-        textView = (TextView)findViewById(R.id.textView5);
+        textView = (TextView) findViewById(R.id.textView5);
 
-        Spinner spinnerRub = (Spinner) findViewById(R.id.spinnerOne);
-        Spinner spinnerKopeck = (Spinner) findViewById(R.id.spinnerTwo);
-        Spinner spinnerHour = (Spinner) findViewById(R.id.spinnerHours);
-
-        selected1 = (int) spinnerRub.getSelectedItem();
-        selected2 = (int) spinnerKopeck.getSelectedItem();
-        selected3 = (int) spinnerHour.getSelectedItem();
+        spinnerRub = (Spinner) findViewById(R.id.spinnerOne); //вот правильная инициализация спинеров которые в верху
+        spinnerKopeck = (Spinner) findViewById(R.id.spinnerTwo); //вот правильная инициализация спинеров которые в верху
+        spinnerHour = (Spinner) findViewById(R.id.spinnerHours); //вот правильная инициализация спинеров которые в верху
 
         adapterSpinnerOne();
         adapterSpinnerTwo();
         adapterSpinnerHours();
 
-
-
+        setClicklistenerTo3Spinner();
     }
 
-    public void adapterSpinnerOne(){
+    public void adapterSpinnerOne() {
 
         SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
                 android.R.layout.simple_spinner_item, spinnerOne);
-        ((ArrayAdapter<Integer>)spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRub.setAdapter(spinnerAdapter);
     }
 
-    public void adapterSpinnerTwo(){
+    public void adapterSpinnerTwo() {
 
         SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
                 android.R.layout.simple_spinner_item, spinnerTwo);
-        ((ArrayAdapter<Integer>)spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerKopeck.setAdapter(spinnerAdapter);
     }
-    public void adapterSpinnerHours() {
 
+    public void adapterSpinnerHours() {
         SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
                 android.R.layout.simple_spinner_item, spinnerHours);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHour.setAdapter(spinnerAdapter);
+
+    }
+
+
+    public void onClickAgo(View view) {
+        Intent intent = new Intent(RatesActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickForward(View view) {
+    }
+
+    public void setClicklistenerTo3Spinner() {
         spinnerHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                if(selected1 == null && selected2 == null && selected3 == null) {
-                    result = 0;
-                } else {
-                    result = (selected1+(selected2/100)) * selected3;
+
+                selected3 = (int) spinnerHour.getSelectedItem();
+                try {
+
+                    resultTimeYears =  selected3 * 360;
+                    Log.d(LOG_TAG, "result: " + resultTimeYears);
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
                 }
-                textView.setText(result);
+
+                textView.setText(String.valueOf(resultTimeYears));
                 Log.d(LOG_TAG, "itemClick: position = " + position + ", id = "
                         + id);
             }
@@ -112,19 +118,5 @@ public class RatesActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-
-
-
-
-
-    public void onClickAgo(View view) {
-        Intent intent = new Intent(RatesActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-    public void onClickForward(View view) {
-    }
 
 }
