@@ -13,7 +13,7 @@
     <string name="text1">Стоимость тарифа, руб/час</string>
     <string name="text2">Среднее кол-во часов работы в день \n по тарифу 1. час:</string>
     <string name="text3">Кол-во отработанных часов за год по Тарифу 1: </string>
-    <string name="text4">Кол-во отработанных часов за год по Тарифу 1: </string>
+    <string name="text4">Учитывать удорожание тарифов в процентах в год (выберите ниже). </string>
     <string name="text5">365 часов </string>
     <string name="text6">_____________________________ </string>
     <string name="rate2">Тариф №2</string>
