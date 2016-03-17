@@ -1,6 +1,6 @@
 package ru.example.mike.ladlampeconomist;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
@@ -26,46 +27,75 @@ public class RatesActivity extends AppCompatActivity {
     private GestureDetectorCompat mGestureDetectorCompat;
 
     private static List<Integer> spinnerOne = new ArrayList<>();
-    private static List<Integer> spinnerTwo = new ArrayList<>(); //TODO: перевести "копейку"
+    private static List<Integer> spinnerTwo = new ArrayList<>();
     private static List<Integer> spinnerHours = new ArrayList<>();
+
+    private static List<Integer> spinner_rates_2_one = new ArrayList<>();
+    private static List<Integer> spinner_rates_2_two = new ArrayList<>();
+    private static List<Integer> spinner_rates_2_hours = new ArrayList<>();
+
     TextView textView;
     Spinner spinnerRub; //вот эти спинеры
     Spinner spinnerKopeck; //вот эти спинеры
     Spinner spinnerHour;//вот эти спинеры
+
+    Spinner spinnerRatesTwoRub; //вот эти спинеры
+    Spinner spinnerRatesTwoKopeck; //вот эти спинеры
+    Spinner spinnerRatesTwoHour;//вот эти спинеры
     private int resultTimeYears; // руезультат с точкой 4.767
     private int selected3; //целое число
     final String LOG_TAG = "myLogs";
 
 
     static {
-        for (int i = 1; i <= 50; i++) {  //так инициализировать списки не стоит
+        for (int i = 1; i <= 50; i++) {
             spinnerOne.add(i);
+        }
+        for (int i = 1; i <= 50; i++) {
+            spinner_rates_2_one.add(i);
         }
         for (int i = 1; i <= 99; i++) {
             spinnerTwo.add(i);
         }
+        for (int i = 1; i <= 99; i++) {
+            spinner_rates_2_two.add(i);
+        }
+
         for (int i = 1; i <= 24; i++) {
             spinnerHours.add(i);
         }
+        for (int i = 1; i <= 24; i++) {
+            spinner_rates_2_hours.add(i);
+        }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rates);
 
+        mGestureDetectorCompat = new GestureDetectorCompat(this, new MyGestureListener());
+
         textView = (TextView) findViewById(R.id.textView5);
 
-        spinnerRub = (Spinner) findViewById(R.id.spinnerOne); //вот правильная инициализация спинеров которые в верху
-        spinnerKopeck = (Spinner) findViewById(R.id.spinnerTwo); //вот правильная инициализация спинеров которые в верху
-        spinnerHour = (Spinner) findViewById(R.id.spinnerHours); //вот правильная инициализация спинеров которые в верху
+        spinnerRub = (Spinner) findViewById(R.id.spinnerOne);
+        spinnerKopeck = (Spinner) findViewById(R.id.spinnerTwo);
+        spinnerHour = (Spinner) findViewById(R.id.spinnerHours);
+
+        spinnerRatesTwoRub = (Spinner) findViewById(R.id.spinner_rates_2_one);
+        spinnerRatesTwoKopeck = (Spinner) findViewById(R.id.spinner_rates_2_two);
+        spinnerRatesTwoHour = (Spinner) findViewById(R.id.spinner_rates_2_hours);
 
         adapterSpinnerOne();
         adapterSpinnerTwo();
         adapterSpinnerHours();
+        adapterSpinnerRates2One();
+        adapterSpinnerRates2Two();
+        adapterSpinnerRates2Hours();
 
         setClicklistenerTo3Spinner();
-        mGestureDetectorCompat = new GestureDetectorCompat(this, new MyGestureListener());
+
 
     }
     @Override
@@ -77,11 +107,7 @@ public class RatesActivity extends AppCompatActivity {
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (e2.getX() > e1.getX()) {
-                Toast.makeText(getBaseContext(),
-                        "Свайп вправо",
-                        Toast.LENGTH_SHORT).show();
-
+            if (e1.getX() < e2.getX()) {
                 Intent intent = new Intent(
                         RatesActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -112,6 +138,30 @@ public class RatesActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, spinnerHours);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHour.setAdapter(spinnerAdapter);
+
+    }
+
+    public void adapterSpinnerRates2One() {
+
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
+                android.R.layout.simple_spinner_item, spinner_rates_2_one);
+        ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRatesTwoRub.setAdapter(spinnerAdapter);
+    }
+
+    public void adapterSpinnerRates2Two() {
+
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
+                android.R.layout.simple_spinner_item, spinner_rates_2_two);
+        ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRatesTwoKopeck.setAdapter(spinnerAdapter);
+    }
+
+    public void adapterSpinnerRates2Hours() {
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
+                android.R.layout.simple_spinner_item, spinner_rates_2_hours);
+        ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRatesTwoHour.setAdapter(spinnerAdapter);
 
     }
 
@@ -151,4 +201,13 @@ public class RatesActivity extends AppCompatActivity {
         });
     }
 
-}
+    public void onCheckBoxClicked(View view){
+        boolean checked = ((CheckBox)view).isChecked();
+        spinnerRatesTwoRub.setEnabled(checked);
+        spinnerRatesTwoKopeck.setEnabled(checked);
+        spinnerRatesTwoHour.setEnabled(checked);
+
+        }
+    }
+
+
