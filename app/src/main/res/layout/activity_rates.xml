@@ -12,7 +12,7 @@
     android:stretchColumns="*"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="16dp"
+    android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="ru.example.mike.ladlampeconomist.RatesActivity">
 
     <TableRow
@@ -51,8 +51,7 @@
             android:layout_centerHorizontal="true" />
     </TableRow>
 
-    <TableRow>
-        android:id="@+id/tableRow3"
+    <LinearLayout>
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -67,8 +66,7 @@
             android:layout_height = "wrap_content"
             android:layout_weight="1" />
 
-
-    </TableRow>
+    </LinearLayout>
 
     <TableRow
         android:id="@+id/tableRow4"
@@ -163,13 +161,14 @@
             android:id="@+id/checkBox"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/rate2"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:onClick="onCheckBoxClicked"
+            android:checked="true" />
 
 
     </TableRow>
 
-    <TableRow>
-        android:id="@+id/tableRow10"
+    <LinearLayout>
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -184,7 +183,7 @@
             android:layout_height = "wrap_content"
             android:layout_weight="1" />
 
-    </TableRow>
+    </LinearLayout>
 
     <TableRow>
         android:id="@+id/tableRow11"
@@ -218,7 +217,7 @@
     </TableRow>
 
     <TableRow>
-        android:id="@+id/tableRow5"
+        android:id="@+id/tableRow13"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -232,23 +231,21 @@
     </TableRow>
 
 
-    <TableRow>
-        android:id="@+id/tableRow8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    <LinearLayout>
+    android:id="@+id/linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_ago"
             android:id="@+id/buttonAgo"
-            android:layout_marginBottom="96dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="36dp"
-            android:layout_marginStart="36dp"
-            android:onClick="onClickAgo" />
+            android:onClick="onClickAgo"
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="wrap_content"
@@ -258,10 +255,9 @@
             android:layout_alignTop="@+id/buttonAgo"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="48dp"
-            android:layout_marginEnd="48dp"
-            android:onClick="onClickForward" />
-    </TableRow>
+            android:onClick="onClickForward"
+            android:layout_weight="1" />
+</LinearLayout>>
 
 
 
