@@ -30,10 +30,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             if (e2.getX() < e1.getX()) {
-                Toast.makeText(getBaseContext(),
-                        "Свайп влево",
-                        Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(
                         MainActivity.this, RatesActivity.class);
                 startActivity(intent);
