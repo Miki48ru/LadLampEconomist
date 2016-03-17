@@ -15,7 +15,11 @@
     <string name="text3">Кол-во отработанных часов за год по Тарифу 1: </string>
     <string name="text4">Учитывать удорожание тарифов в процентах в год (выберите ниже). </string>
     <string name="text5">365 часов </string>
-    <string name="text6">_____________________________ </string>
+    <string name="text6">______________________________________________ </string>
     <string name="rate2">Тариф №2</string>
+    <string name="check_summary">Вкл. или Выкл. Тарифа №2.</string>
+    <string name="check_title">Тариф №2</string>
+    <string name="hints_summary">Если у Вас два тарифа, включите его и введите исходные данные.</string>
+    <string name="hints_title">Подсказки</string>
 
 </resources>
