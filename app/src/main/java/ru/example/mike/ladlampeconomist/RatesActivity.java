@@ -74,8 +74,9 @@ public class RatesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rates);
+           findViewById(R.id.tableLayoutRates).setOnTouchListener(activitySwiped);;
 
-        mGestureDetectorCompat = new GestureDetectorCompat(this, new MyGestureListener());
+
 
         textView = (TextView) findViewById(R.id.textView5);
 
@@ -98,23 +99,7 @@ public class RatesActivity extends AppCompatActivity {
 
 
     }
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        this.mGestureDetectorCompat.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
 
-    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            if (e1.getX() < e2.getX()) {
-                Intent intent = new Intent(
-                        RatesActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-            return true;
-        }
-    }
 
 
     public void adapterSpinnerOne() {
@@ -208,6 +193,23 @@ public class RatesActivity extends AppCompatActivity {
         spinnerRatesTwoHour.setEnabled(checked);
 
         }
+    View.OnTouchListener activitySwiped = new OnSwipeTouchListener(this) {
+        public boolean onSwipeRight() {
+            Intent intent = new Intent(RatesActivity.this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        public boolean onSwipeLeft() {
+
+            return true;
+        }
+
+        public boolean onSwipeBottom() {
+            return true;
+        }
+
+    };
     }
 
 
