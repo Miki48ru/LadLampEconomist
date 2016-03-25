@@ -8,6 +8,7 @@
     <string name="title_activity_rates">RatesActivity</string>
     <string name="button_ago">Назад</string>
     <string name="button_forward">Вперед</string>
+    <string name="button_rates">Ввод данных по лампам</string>
     <string name="rates_title">Расчет тарифов</string>
     <string name="rate1">Тариф №1</string>
     <string name="text1">Стоимость тарифа, руб/час</string>
@@ -21,5 +22,7 @@
     <string name="check_title">Тариф №2</string>
     <string name="hints_summary">Если у Вас два тарифа, включите его и введите исходные данные.</string>
     <string name="hints_title">Подсказки</string>
+    <string name="lamp_title">Ввод информации по лампам</string>
+    <string name="activity3_title">Обычная лампа</string>
 
 </resources>
