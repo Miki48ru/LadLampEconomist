@@ -33,15 +33,17 @@ public class RatesActivity extends AppCompatActivity {
     private static List<Integer> spinner_rates_2_one = new ArrayList<>();
     private static List<Integer> spinner_rates_2_two = new ArrayList<>();
     private static List<Integer> spinner_rates_2_hours = new ArrayList<>();
+    private static List<Integer> spinner_percent = new ArrayList<>();
 
     TextView textView;
-    Spinner spinnerRub; //вот эти спинеры
-    Spinner spinnerKopeck; //вот эти спинеры
-    Spinner spinnerHour;//вот эти спинеры
+    Spinner spinnerRub;
+    Spinner spinnerKopeck;
+    Spinner spinnerHour;
 
-    Spinner spinnerRatesTwoRub; //вот эти спинеры
-    Spinner spinnerRatesTwoKopeck; //вот эти спинеры
-    Spinner spinnerRatesTwoHour;//вот эти спинеры
+    Spinner spinnerRatesTwoRub;
+    Spinner spinnerRatesTwoKopeck;
+    Spinner spinnerRatesTwoHour;
+    Spinner spinnerPercent;
     private int resultTimeYears; // руезультат с точкой 4.767
     private int selected3; //целое число
     final String LOG_TAG = "myLogs";
@@ -67,6 +69,9 @@ public class RatesActivity extends AppCompatActivity {
         for (int i = 1; i <= 24; i++) {
             spinner_rates_2_hours.add(i);
         }
+        for (int i = 1; i <=50; i++){
+            spinner_percent.add(i);
+        }
     }
 
 
@@ -87,6 +92,7 @@ public class RatesActivity extends AppCompatActivity {
         spinnerRatesTwoRub = (Spinner) findViewById(R.id.spinner_rates_2_one);
         spinnerRatesTwoKopeck = (Spinner) findViewById(R.id.spinner_rates_2_two);
         spinnerRatesTwoHour = (Spinner) findViewById(R.id.spinner_rates_2_hours);
+        spinnerPercent = (Spinner) findViewById(R.id.spinner_percent);
 
         adapterSpinnerOne();
         adapterSpinnerTwo();
@@ -94,6 +100,7 @@ public class RatesActivity extends AppCompatActivity {
         adapterSpinnerRates2One();
         adapterSpinnerRates2Two();
         adapterSpinnerRates2Hours();
+        adapterSpinnerPercent();
 
         setClicklistenerTo3Spinner();
 
@@ -147,6 +154,13 @@ public class RatesActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, spinner_rates_2_hours);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRatesTwoHour.setAdapter(spinnerAdapter);
+
+    }
+    public void adapterSpinnerPercent() {
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
+                android.R.layout.simple_spinner_item, spinner_percent);
+        ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPercent.setAdapter(spinnerAdapter);
 
     }
 
