@@ -1,6 +1,8 @@
 package ru.example.mike.ladlampeconomist;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -23,17 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RatesActivity extends AppCompatActivity {
+    public RatesActivity() {
+    }
 
-    private GestureDetectorCompat mGestureDetectorCompat;
+    private static List<Integer> spinnerOne = new ArrayList<>(); // список для выбора стоимости в рублях
+    private static List<Integer> spinnerTwo = new ArrayList<>(); // список для выбора стоимости в копейках
+    private static List<Integer> spinnerHours = new ArrayList<>();// список для выбора работы лампочки в часах
 
-    private static List<Integer> spinnerOne = new ArrayList<>();
-    private static List<Integer> spinnerTwo = new ArrayList<>();
-    private static List<Integer> spinnerHours = new ArrayList<>();
-
-    private static List<Integer> spinner_rates_2_one = new ArrayList<>();
-    private static List<Integer> spinner_rates_2_two = new ArrayList<>();
-    private static List<Integer> spinner_rates_2_hours = new ArrayList<>();
-    private static List<Integer> spinner_percent = new ArrayList<>();
+    private static List<Integer> spinner_rates_2_one = new ArrayList<>(); // список для выбора стоимости в рублях для тарифа 2
+    private static List<Integer> spinner_rates_2_two = new ArrayList<>(); // список для выбора стоимости в копейках для тарифа 2
+    private static List<Integer> spinner_rates_2_hours = new ArrayList<>(); // список для выбора работы лампочки в часах
+    private static List<Integer> spinner_percent = new ArrayList<>(); // список для выбора процента удорожания
 
     TextView textView;
     Spinner spinnerRub;
@@ -48,12 +50,12 @@ public class RatesActivity extends AppCompatActivity {
     private int selected3; //целое число
     final String LOG_TAG = "myLogs";
 
-
+// статически заполняем списки выборов так как никогда не меняются значения
     static {
-        for (int i = 1; i <= 50; i++) {
+        for (int i = 0; i <= 50; i++) {
             spinnerOne.add(i);
         }
-        for (int i = 1; i <= 50; i++) {
+        for (int i = 0; i <= 50; i++) {
             spinner_rates_2_one.add(i);
         }
         for (int i = 0; i <= 99; i++) {
@@ -69,17 +71,21 @@ public class RatesActivity extends AppCompatActivity {
         for (int i = 1; i <= 24; i++) {
             spinner_rates_2_hours.add(i);
         }
-        for (int i = 1; i <=50; i++){
+        for (int i = 0; i <=50; i++){
             spinner_percent.add(i);
         }
     }
 
 
+    public int getResultTimeYears() {
+        return resultTimeYears;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rates);
-           findViewById(R.id.tableLayoutRates).setOnTouchListener(activitySwiped);;
+           findViewById(R.id.tableLayoutRates).setOnTouchListener(activitySwiped);
 
 
 
@@ -169,8 +175,10 @@ public class RatesActivity extends AppCompatActivity {
         Intent intent = new Intent(RatesActivity.this, MainActivity.class);
         startActivity(intent);
     }
-
+// переход на активити с вводом данных ламп
     public void onClickForward(View view) {
+        Intent intent = new Intent(RatesActivity.this, LampInfoActivity.class);
+        startActivity(intent);
     }
 
     public void setClicklistenerTo3Spinner() {
@@ -215,6 +223,8 @@ public class RatesActivity extends AppCompatActivity {
         }
 
         public boolean onSwipeLeft() {
+            Intent intent = new Intent(RatesActivity.this, LampInfoActivity.class);
+            startActivity(intent);
 
             return true;
         }
@@ -224,6 +234,39 @@ public class RatesActivity extends AppCompatActivity {
         }
 
     };
+
+// создаем Диалоговое окно AlertDialog для иконки ИНФО
+    public void onClickInfo(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(RatesActivity.this);
+        builder.setTitle(R.string.icon_info_title)
+                .setMessage(R.string.icon_info)
+                .setIcon(R.drawable.icon_info)
+                .setCancelable(false)
+                .setNegativeButton(R.string.icon_info_close_button,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
+// создаем Диалоговое окно AlertDialog для иконки ИНФО в Тарифе 2
+    public void onClickInfoRate2(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(RatesActivity.this);
+        builder.setTitle(R.string.icon_info_title)
+                .setMessage(R.string.icon_info_rate_2)
+                .setIcon(R.drawable.icon_info)
+                .setCancelable(false)
+                .setNegativeButton(R.string.icon_info_close_button,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+}
 
 
