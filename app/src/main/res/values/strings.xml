@@ -24,5 +24,14 @@
     <string name="hints_title">Подсказки</string>
     <string name="lamp_title">Ввод информации по лампам</string>
     <string name="activity3_title">Обычная лампа</string>
+    <string name="icon_info_title">Обратите внимание!</string>
+    <string name="icon_info_close_button">Закрыть</string>
+    <string name="icon_info">Стоимость тарифа Вы можете посмотреть в квитанции на оплату или на сайте электросетевой компании.</string>
+    <string name="icon_info_rate_2">Если у вас однофазный электросчетчик, просто уберите галочку в начале строки, и расчет будет произведен по однотарифному варианту.</string>
+    <string name="text_lamp">Обычная лампочка</string>
+    <string name="text_power_lamp">Мощность, ватт</string>
+    <string name="price_lamp">Цена, руб. </string>
+
+
 
 </resources>
