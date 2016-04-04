@@ -7,6 +7,48 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:id="@+id/lamp_info_activity"
     tools:context="ru.example.mike.ladlampeconomist.LampInfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/text_lamp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/text_power_lamp"/>
+
+        <Spinner
+            android:id = "@+id/spinner_power"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price_lamp"/>
+
+        <Spinner
+            android:id = "@+id/spinner_lamp_price"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 </RelativeLayout>
