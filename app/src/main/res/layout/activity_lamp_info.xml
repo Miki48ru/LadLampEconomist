@@ -14,6 +14,7 @@
     tools:context="ru.example.mike.ladlampeconomist.LampInfoActivity">
 
     <LinearLayout
+        android:id="@+id/linear_lamp_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -48,7 +49,88 @@
             android:layout_width = "match_parent"
             android:layout_height = "wrap_content"
             android:layout_weight="1" />
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_lamp_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_lamp"
+        android:layout_below="@id/linear_lamp_layout"/>
+
+    <ImageButton
+        android:id="@+id/info_button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_info"
+        android:background="@drawable/icon_info"
+        android:onClick="onClickInfoChange"
+        android:layout_below="@id/linear_lamp_layout"
+        android:layout_toRightOf="@id/text_lamp_3"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="-10dp"
+        android:contentDescription="icon_info" />
+
+    <Spinner
+        android:id = "@+id/spinner_lamp_change"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:layout_weight="1"
+        android:layout_below="@id/text_lamp_3"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/last_text_lamp_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_lamp_change"
+        android:text="@string/text_pay_energy"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/text_table_1"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_border"
+        android:text="@string/rate1"
+        android:textColor="#000"
+        android:layout_below="@id/last_text_lamp_activity"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="60dp"
+        android:padding="@dimen/activity_horizontal_margin"/>
+    <TextView
+        android:id="@+id/text_table_2"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_border"
+        android:text="@string/rate2"
+        android:textColor="#000"
+        android:layout_below="@id/last_text_lamp_activity"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@id/text_table_1"
+        android:padding="@dimen/activity_horizontal_margin"/>
+    <TextView
+        android:id="@+id/text_table_3"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_border"
+        android:text=""
+        android:textColor="#000"
+        android:layout_below="@id/text_table_1"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="60dp"
+        android:padding="@dimen/activity_horizontal_margin"/>
+
+    <TextView
+        android:id="@+id/text_table_4"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_border"
+        android:text=""
+        android:textColor="#000"
+        android:layout_below="@id/text_table_2"
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@id/text_table_3"
+        android:padding="@dimen/activity_horizontal_margin"/>
 
 </RelativeLayout>
