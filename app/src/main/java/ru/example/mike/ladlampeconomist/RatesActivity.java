@@ -48,13 +48,13 @@ public class RatesActivity extends AppCompatActivity {
     Spinner spinnerPercent;
     private int resultTimeYears;
     private int resultTimeYearsTwoRate;
-    private int selected3; //целое число
+    private int selected3;
     private int selected3TwoRate;
     private int selectedRubRateOne;
     private int resultPriceRub;
     private int selectedKopRateOne;
     private int resultPriceKopeck;
-    private double summPrice = resultPriceRub + ((double)resultPriceKopeck/100);
+    private double summPrice = resultPriceRub + ((double)resultPriceKopeck/100); // объеденяем целые числа из спинеров рублей и копеек в одно дробное число.
 
     final String LOG_TAG = "myLogs";
 
@@ -133,6 +133,7 @@ public class RatesActivity extends AppCompatActivity {
         return summPrice;
     }
 
+    // адаптер для спинера с рублями
     public void adapterSpinnerOne() {
 
         SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this,
