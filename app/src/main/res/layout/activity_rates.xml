@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tableLayoutRates"
@@ -51,14 +52,17 @@
             android:layout_span="2"
             android:id="@+id/textView"
             android:layout_below="@+id/textViewRate1"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
         <ImageButton
             android:id="@+id/info_button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_info"
             android:background="@drawable/icon_info"
-            android:onClick="onClickInfo"/>
+            android:onClick="onClickInfo"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="-30dp"/>
     </TableRow>
 
     <LinearLayout
@@ -173,13 +177,16 @@
             android:text="@string/rate2"
             android:layout_column="0"
             android:onClick="onCheckBoxClicked"
-            android:checked="true" />
+            android:checked="true"
+            android:layout_marginTop="10dp"/>
         <ImageButton
             android:id="@+id/info_button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_info"
             android:background="@drawable/icon_info"
+            android:src="@drawable/icon_info"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="-30dp"
             android:onClick="onClickInfoRate2"/>
 
 
