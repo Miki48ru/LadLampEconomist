@@ -46,8 +46,16 @@ public class RatesActivity extends AppCompatActivity {
     Spinner spinnerRatesTwoKopeck;
     Spinner spinnerRatesTwoHour;
     Spinner spinnerPercent;
-    private int resultTimeYears; // руезультат с точкой 4.767
+    private int resultTimeYears;
+    private int resultTimeYearsTwoRate;
     private int selected3; //целое число
+    private int selected3TwoRate;
+    private int selectedRubRateOne;
+    private int resultPriceRub;
+    private int selectedKopRateOne;
+    private int resultPriceKopeck;
+    private double summPrice = resultPriceRub + ((double)resultPriceKopeck/100);
+
     final String LOG_TAG = "myLogs";
 
 // статически заполняем списки выборов так как никогда не меняются значения
@@ -77,9 +85,6 @@ public class RatesActivity extends AppCompatActivity {
     }
 
 
-    public int getResultTimeYears() {
-        return resultTimeYears;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,11 +114,24 @@ public class RatesActivity extends AppCompatActivity {
         adapterSpinnerPercent();
 
         setClicklistenerTo3Spinner();
+        setClicklistenerTwoRatesSpinner();
+        setClicklistenerRubSpinner();
+        setClicklistenerKopSpinner();
 
 
     }
 
+    public int getResultTimeYearsTwoRate() {
+        return resultTimeYearsTwoRate;
+    }
 
+    public int getResultTimeYears() {
+        return resultTimeYears;
+    }
+
+    public double getSummPrice() {
+        return summPrice;
+    }
 
     public void adapterSpinnerOne() {
 
@@ -189,8 +207,8 @@ public class RatesActivity extends AppCompatActivity {
                 selected3 = (int) spinnerHour.getSelectedItem();
                 try {
 
-                    resultTimeYears =  selected3 * 360;
-                    Log.d(LOG_TAG, "result: " + resultTimeYears);
+                    resultTimeYears = selected3 * 360;
+                    Log.d(LOG_TAG, "resultTimeYear: " + resultTimeYears);
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
@@ -213,8 +231,82 @@ public class RatesActivity extends AppCompatActivity {
         spinnerRatesTwoRub.setEnabled(checked);
         spinnerRatesTwoKopeck.setEnabled(checked);
         spinnerRatesTwoHour.setEnabled(checked);
-
         }
+
+    public void setClicklistenerTwoRatesSpinner() {
+        spinnerRatesTwoHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                selected3TwoRate = (int) spinnerRatesTwoHour.getSelectedItem();
+                try {
+
+                    resultTimeYearsTwoRate = selected3TwoRate * 360;
+                    Log.d(LOG_TAG, "resultTime2Rate: " + resultTimeYearsTwoRate);
+
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void setClicklistenerRubSpinner() {
+        spinnerRub.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                selectedRubRateOne = (int) spinnerRub.getSelectedItem();
+                try {
+
+                    resultPriceRub = selectedRubRateOne;
+                    Log.d(LOG_TAG, "resultPriceRub: " + resultPriceRub);
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void setClicklistenerKopSpinner() {
+        spinnerKopeck.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                selectedKopRateOne = (int) spinnerKopeck.getSelectedItem();
+                try {
+
+                    resultPriceKopeck = selectedKopRateOne;
+                    Log.d(LOG_TAG, "resultPriceKop: " + resultPriceKopeck);
+
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     View.OnTouchListener activitySwiped = new OnSwipeTouchListener(this) {
         public boolean onSwipeRight() {
             Intent intent = new Intent(RatesActivity.this, MainActivity.class);
