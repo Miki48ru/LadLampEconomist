@@ -27,19 +27,21 @@ public class LampInfoActivity extends AppCompatActivity {
     private static List<Integer> listChangeLamp = new ArrayList<>();
 
 
-    RatesActivity result = new RatesActivity(); //объект класса для получения закрытой переменной
-    private int baseResult = result.getResultTimeYears(); // переменная с аргументом из активности с расчетом по тарифам
 
-    RatesActivity resultTwoRate = new RatesActivity();
-    private int baseResultTwoRate = resultTwoRate.getResultTimeYearsTwoRate();
+    private int baseResult = RatesActivity.getInstance().getResultTimeYears(); // переменная со значением времени из активности с расчетом по тарифам
 
-    RatesActivity priceRateOne = new RatesActivity();
-    private double summPriceRate1 = priceRateOne.getSummPrice();
+    private int baseResultTwoRate =  RatesActivity.getInstance().getResultTimeYearsTwoRate();
 
+    private float summPriceRate1 =  RatesActivity.getInstance().getSummPrice(); // цена по тарифу 1
+
+    private float summPriceRate2 = RatesActivity.getInstance().getSummPriceTwoRate(); // цена по тарифу 2
+
+    private boolean enableCheckTwoRate = RatesActivity.getInstance().isChecked(); // стоит галочка тарифа 2 или не стоит
 
     private int selectedPower;
     private double resultPrice;
     private double watt = 1000.0;
+    private  double resultPriceTwoRate;
 
 
 
@@ -49,6 +51,7 @@ public class LampInfoActivity extends AppCompatActivity {
     Spinner spinnerChangeLamp;
 
     TextView textView;
+
 
     static {
         for (int i = 0; i <= 250; i = i+10) {
@@ -72,7 +75,7 @@ public class LampInfoActivity extends AppCompatActivity {
 
 
 
-        textView = (TextView)findViewById(R.id.text_table_3);
+        textView = (TextView)findViewById(R.id.text_table_1);
 
 
         spinnerPowerLamp = (Spinner) findViewById(R.id.spinner_power);
@@ -99,12 +102,20 @@ public class LampInfoActivity extends AppCompatActivity {
                 try {
 
                     resultPrice = (double) selectedPower * baseResult / watt * summPriceRate1; // мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
-                    Log.d(LOG_TAG, "resultPrice: " + resultPrice + " " + selectedPower + " " + baseResult + " " + watt + " " + summPriceRate1);
+                    resultPriceTwoRate = (double) selectedPower * baseResultTwoRate / watt * summPriceRate2;
+                    // если чекбокс включен, то тариф 2 расчитывается
+                    if (enableCheckTwoRate == true){
+
+                        textView.setText(String.valueOf(Math.round(resultPrice + resultPriceTwoRate) + " руб.")); //Math.round - округление значения
+                    }
+                    else if (enableCheckTwoRate == false) {
+                        textView.setText(String.valueOf(Math.round(resultPrice) + " руб."));
+                    }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
                 }
-                textView.setText(String.valueOf(resultPrice + " руб."));
+
 
             }
 
@@ -177,5 +188,16 @@ public class LampInfoActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+    public void onClickAgo(View view) {
+        Intent intent = new Intent(LampInfoActivity.this, RatesActivity.class);
+        startActivity(intent);
+    }
+
+
+    public void onClickForward(View view) {
+
+    }
+
 
 }
