@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -88,49 +93,73 @@
         android:layout_gravity="center_horizontal"/>
     <TextView
         android:id="@+id/text_table_1"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:background="@drawable/custom_border"
-        android:text="@string/rate1"
-        android:textColor="#000"
-        android:layout_below="@id/last_text_lamp_activity"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="60dp"
-        android:padding="@dimen/activity_horizontal_margin"/>
-    <TextView
-        android:id="@+id/text_table_2"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:background="@drawable/custom_border"
-        android:text="@string/rate2"
-        android:textColor="#000"
-        android:layout_below="@id/last_text_lamp_activity"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
-        android:layout_toRightOf="@id/text_table_1"
-        android:padding="@dimen/activity_horizontal_margin"/>
-    <TextView
-        android:id="@+id/text_table_3"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:background="@drawable/custom_border"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text=""
+        android:textSize="30dp"
         android:textColor="#000"
+        android:layout_below="@id/last_text_lamp_activity"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="120dp"
+
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:id="@+id/last_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/text_table_1"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="60dp"
-        android:padding="@dimen/activity_horizontal_margin"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_table_4"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:background="@drawable/custom_border"
-        android:text=""
-        android:textColor="#000"
-        android:layout_below="@id/text_table_2"
-        android:layout_marginTop="0dp"
-        android:layout_toRightOf="@id/text_table_3"
-        android:padding="@dimen/activity_horizontal_margin"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/text_lamp"
+            android:layout_gravity="center_horizontal" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/text_power_lamp"/>
+
+        <Spinner
+            android:id = "@+id/spinner_power_led"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price_lamp"/>
+
+        <Spinner
+            android:id = "@+id/spinner_lamp_price_led"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/rates_ago"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/rates_ago_text_button"
+        android:layout_below="@id/last_layout"
+        android:padding="15dp"
+        android:onClick="onClickAgo"/>
+
+    <Button
+        android:id="@+id/forward_calculation"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/lamp_forward_text"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:onClick="onClickForward"/>
 </RelativeLayout>
+
+</ScrollView>
