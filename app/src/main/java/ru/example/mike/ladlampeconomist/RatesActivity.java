@@ -4,22 +4,17 @@ package ru.example.mike.ladlampeconomist;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +37,11 @@ public class RatesActivity extends AppCompatActivity {
     Spinner spinnerKopeck;
     Spinner spinnerHour;
 
+    private static RatesActivity instance; // экземпляр данного класса.
+
+    public static RatesActivity getInstance() { // с помощью геттера в другом классе получаем значения через геттеры переменных
+        return instance;
+    }
     Spinner spinnerRatesTwoRub;
     Spinner spinnerRatesTwoKopeck;
     Spinner spinnerRatesTwoHour;
@@ -51,10 +51,19 @@ public class RatesActivity extends AppCompatActivity {
     private int selected3;
     private int selected3TwoRate;
     private int selectedRubRateOne;
+    private int selectedRubRateTwo;
     private int resultPriceRub;
+    private int resultPriceRubTwo;
+
     private int selectedKopRateOne;
+    private int selectedKopRateTwo;
     private int resultPriceKopeck;
-    private double summPrice = resultPriceRub + ((double)resultPriceKopeck/100); // объеденяем целые числа из спинеров рублей и копеек в одно дробное число.
+    private int resultPriceKopeckTwo;
+
+    private float summPrice;
+    private float summPriceTwoRate;
+
+    private boolean checked;
 
     final String LOG_TAG = "myLogs";
 
@@ -66,7 +75,7 @@ public class RatesActivity extends AppCompatActivity {
         for (int i = 0; i <= 50; i++) {
             spinner_rates_2_one.add(i);
         }
-        for (int i = 0; i <= 99; i++) {
+    for (int i = 0; i <= 99; i++) {
             spinnerTwo.add(i);
         }
         for (int i = 0; i <= 99; i++) {
@@ -90,6 +99,8 @@ public class RatesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rates);
+        instance = this;
+
            findViewById(R.id.tableLayoutRates).setOnTouchListener(activitySwiped);
 
 
@@ -117,6 +128,7 @@ public class RatesActivity extends AppCompatActivity {
         setClicklistenerTwoRatesSpinner();
         setClicklistenerRubSpinner();
         setClicklistenerKopSpinner();
+        setClicklistenerRubSpinnerTwoRate();
 
 
     }
@@ -129,9 +141,6 @@ public class RatesActivity extends AppCompatActivity {
         return resultTimeYears;
     }
 
-    public double getSummPrice() {
-        return summPrice;
-    }
 
     // адаптер для спинера с рублями
     public void adapterSpinnerOne() {
@@ -190,15 +199,7 @@ public class RatesActivity extends AppCompatActivity {
     }
 
 
-    public void onClickAgo(View view) {
-        Intent intent = new Intent(RatesActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-// переход на активити с вводом данных ламп
-    public void onClickForward(View view) {
-        Intent intent = new Intent(RatesActivity.this, LampInfoActivity.class);
-        startActivity(intent);
-    }
+
 
     public void setClicklistenerTo3Spinner() {
         spinnerHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -227,12 +228,17 @@ public class RatesActivity extends AppCompatActivity {
         });
     }
 
+    // отключаем спинеры если пользователь снял чекбокс
     public void onCheckBoxClicked(View view){
-        boolean checked = ((CheckBox)view).isChecked();
+        checked = ((CheckBox)view).isChecked();
         spinnerRatesTwoRub.setEnabled(checked);
         spinnerRatesTwoKopeck.setEnabled(checked);
         spinnerRatesTwoHour.setEnabled(checked);
         }
+
+    public boolean isChecked() {
+        return checked = ((CheckBox)findViewById(R.id.checkBox)).isChecked();
+    }
 
     public void setClicklistenerTwoRatesSpinner() {
         spinnerRatesTwoHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -292,7 +298,6 @@ public class RatesActivity extends AppCompatActivity {
                 try {
 
                     resultPriceKopeck = selectedKopRateOne;
-                    Log.d(LOG_TAG, "resultPriceKop: " + resultPriceKopeck);
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
@@ -306,6 +311,64 @@ public class RatesActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+
+    public float getSummPrice() { // объеденяем рубли и копейки в одну сумму
+        return resultPriceRub + ((float)resultPriceKopeck/100);
+    }
+
+    public void setClicklistenerRubSpinnerTwoRate() {
+        spinnerRatesTwoRub.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                selectedRubRateTwo = (int) spinnerRatesTwoRub.getSelectedItem();
+                try {
+
+                    resultPriceRubTwo = selectedRubRateTwo;
+
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void setClicklistenerKopSpinnerTwoRate() {
+        spinnerRatesTwoKopeck.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                selectedKopRateTwo = (int) spinnerRatesTwoKopeck.getSelectedItem();
+                try {
+
+                    resultPriceKopeckTwo = selectedKopRateTwo;
+
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public float getSummPriceTwoRate() { // объеденяем рубли и копейки в одну сумму
+        return resultPriceRubTwo + ((float)resultPriceKopeckTwo/100);
     }
 
     View.OnTouchListener activitySwiped = new OnSwipeTouchListener(this) {
@@ -360,6 +423,18 @@ public class RatesActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+    public void onClickAgo(View view) {
+        Intent intent = new Intent(RatesActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+    // переход на активити с вводом данных ламп
+    public void onClickForward(View view) {
+        Intent intent = new Intent(RatesActivity.this, LampInfoActivity.class);
+        startActivity(intent);
+    }
+
+
 }
 
 
