@@ -35,6 +35,9 @@
     <string name="icon_info_change_lamp">Условная величина, так как скорость перегорания лампы зависит от множества факторов.
         Можете поставить цифру на свое усмотрение, или посчитать ее с учетом количества отработанных часов за год, указанных на предыдущей странице. </string>
     <string name="text_pay_energy">Расходы на оплату электроэнергии за первый год:</string>
+    <string name="rates_ago_text_button">К тарифам</string>
+    <string name="lamp_forward_text">К расчетам</string>
+    <string name="led_lamp">Светодиодная лампа</string>
 
 
 </resources>
