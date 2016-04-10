@@ -26,6 +26,8 @@ public class LampInfoActivity extends AppCompatActivity {
     private static List<Integer> listPrice = new ArrayList<>();
     private static List<Integer> listChangeLamp = new ArrayList<>();
 
+    private static List<Integer> listPowerLed = new ArrayList<>(); // массив мощности светодеодной лампы (spinner)
+    private static List<Integer> listPriceLed = new ArrayList<>(); // спиннер цены лед лампы
 
 
     private int baseResult = RatesActivity.getInstance().getResultTimeYears(); // переменная со значением времени из активности с расчетом по тарифам
@@ -43,14 +45,22 @@ public class LampInfoActivity extends AppCompatActivity {
     private double watt = 1000.0;
     private  double resultPriceTwoRate;
 
+    private int selectedPowerLed;
+    private double resultPriceLed;
+    private  double resultPriceTwoRateLed;
 
 
 
-    Spinner spinnerPowerLamp;
-    Spinner spinnerLampPrice;
-    Spinner spinnerChangeLamp;
 
-    TextView textView;
+    private Spinner spinnerPowerLamp;
+    private Spinner spinnerLampPrice;
+    private Spinner spinnerChangeLamp;
+
+    private Spinner spinnerPowerLed;
+    private Spinner spinnerPriceLed;
+
+    private TextView textView;
+    private TextView ledTextView;
 
 
     static {
@@ -62,6 +72,12 @@ public class LampInfoActivity extends AppCompatActivity {
         }
         for (int i = 0; i <= 10; i++){
             listChangeLamp.add(i);
+        }
+        for (int i = 1; i <= 50; i++) {
+            listPowerLed.add(i);
+        }
+        for (int i = 100; i <= 700; i = i + 10 ) {
+            listPriceLed.add(i);
         }
 
     }
@@ -77,6 +93,7 @@ public class LampInfoActivity extends AppCompatActivity {
 
         textView = (TextView)findViewById(R.id.text_table_1);
 
+        ledTextView = (TextView)findViewById(R.id.text_table_2);
 
         spinnerPowerLamp = (Spinner) findViewById(R.id.spinner_power);
         adapterSpinnerPower();
@@ -88,7 +105,13 @@ public class LampInfoActivity extends AppCompatActivity {
         spinnerChangeLamp = (Spinner) findViewById(R.id.spinner_lamp_change);
         adapterSpinnerChange();
 
+        spinnerPowerLed = (Spinner)findViewById(R.id.spinner_power_led);
+        spinnerPriceLed = (Spinner)findViewById(R.id.spinner_lamp_price_led);
+
+        adapterSpinnerPowerAndPriceLed();
+
         setClicklistenerPriceRatesSpinner();
+        setClicklistenerLedSpinner();
 
     }
 
@@ -104,16 +127,15 @@ public class LampInfoActivity extends AppCompatActivity {
                     resultPrice = (double) selectedPower * baseResult / watt * summPriceRate1; // мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
                     resultPriceTwoRate = (double) selectedPower * baseResultTwoRate / watt * summPriceRate2;
                     // если чекбокс включен, то тариф 2 расчитывается
-                    if (enableCheckTwoRate == true){
+                    if (enableCheckTwoRate == true) {
 
                         textView.setText(String.valueOf(Math.round(resultPrice + resultPriceTwoRate) + " руб.")); //Math.round - округление значения
-                    }
-                    else if (enableCheckTwoRate == false) {
+                    } else if (enableCheckTwoRate == false) {
                         textView.setText(String.valueOf(Math.round(resultPrice) + " руб."));
                     }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
+
                 }
 
 
@@ -121,14 +143,43 @@ public class LampInfoActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    public void setClicklistenerLedSpinner() {
+        spinnerPowerLed.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                selectedPowerLed = (int) spinnerPowerLed.getSelectedItem();
+                try {
+
+                    resultPriceLed = (double) selectedPowerLed * baseResult / watt * summPriceRate1; // мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
+                    resultPriceTwoRateLed = (double) selectedPowerLed * baseResultTwoRate / watt * summPriceRate2;
+                    // если чекбокс включен, то тариф 2 расчитывается
+                    if (enableCheckTwoRate == true) {
+
+                        ledTextView.setText(String.valueOf(Math.round(resultPriceLed + resultPriceTwoRateLed) + " руб.")); //Math.round - округление значения
+                    } else if (enableCheckTwoRate == false) {
+                        ledTextView.setText(String.valueOf(Math.round(resultPriceLed) + " руб."));
+                    }
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
 
 
-
-    // метод для свайпа активностей
+    // метод для свайпа активити
     View.OnTouchListener activitySwiped = new OnSwipeTouchListener(this) {
         public boolean onSwipeRight() {
             Intent intent = new Intent(LampInfoActivity.this, RatesActivity.class);
@@ -171,6 +222,21 @@ public class LampInfoActivity extends AppCompatActivity {
         spinnerChangeLamp.setAdapter(spinnerAdapter);
     }
 
+    public void adapterSpinnerPowerAndPriceLed() {
+
+        SpinnerAdapter spinnerAdapter = new ArrayAdapter<Integer>(this, // создаем адаптер между раскрывающимся списком и массивом
+                android.R.layout.simple_spinner_item, listPowerLed);
+        ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPowerLed.setAdapter(spinnerAdapter);
+
+        SpinnerAdapter mSpinnerAdapter = new ArrayAdapter<Integer>(this, // создаем адаптер между раскрывающимся списком и массивом
+                android.R.layout.simple_spinner_item, listPriceLed);
+        ((ArrayAdapter<Integer>) mSpinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPriceLed.setAdapter(mSpinnerAdapter);
+    }
+
+
+
 
     // вывод информации по нажатию на иконку информации
     public void onClickInfoChange(View view) {
@@ -196,7 +262,8 @@ public class LampInfoActivity extends AppCompatActivity {
 
 
     public void onClickForward(View view) {
-
+        Intent intent = new Intent(LampInfoActivity.this, SettlementsActivity.class);
+        startActivity(intent);
     }
 
 
