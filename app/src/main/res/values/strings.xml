@@ -38,6 +38,20 @@
     <string name="rates_ago_text_button">К тарифам</string>
     <string name="lamp_forward_text">К расчетам</string>
     <string name="led_lamp">Светодиодная лампа</string>
+    <string name="settlements_activity">Расчеты</string>
+    <string name="text_one_settlments_activity">Информация по расходам включает в себя: покупку ламп,
+        покупку ламп на замену и расходы на оплату электроэнергии,
+        суммарно за количество лет.</string>
+    <string name="cell_1">Интервал расходов</string>
+    <string name="cell_2">Обычная лампа, руб</string>
+    <string name="cell_3">Светодиодная, руб</string>
+    <string name="cell_4">Выгода, руб</string>
+    <string name="cell_5">За первый год</string>
+    <string name="cell_6">За два года</string>
+    <string name="cell_7">За три года</string>
+    <string name="cell_8">За четыре года</string>
+    <string name="cell_9">За пять лет</string>
+    <string name="last_text">Как видно из таблицы, выигрыш по затратам появляется уже на ___ году использования светодиодных ламп. </string>
 
 
 </resources>
