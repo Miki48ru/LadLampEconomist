@@ -37,11 +37,6 @@ public class RatesActivity extends AppCompatActivity {
     Spinner spinnerKopeck;
     Spinner spinnerHour;
 
-    private static RatesActivity instance; // экземпляр данного класса.
-
-    public static RatesActivity getInstance() { // с помощью геттера в другом классе получаем значения через геттеры переменных
-        return instance;
-    }
     Spinner spinnerRatesTwoRub;
     Spinner spinnerRatesTwoKopeck;
     Spinner spinnerRatesTwoHour;
@@ -60,6 +55,7 @@ public class RatesActivity extends AppCompatActivity {
     private int resultPriceKopeck;
     private int resultPriceKopeckTwo;
 
+    private int percent;
     private float summPrice;
     private float summPriceTwoRate;
 
@@ -99,9 +95,8 @@ public class RatesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rates);
-        instance = this;
 
-           findViewById(R.id.tableLayoutRates).setOnTouchListener(activitySwiped);
+        findViewById(R.id.tableLayoutRates).setOnTouchListener(activitySwiped);
 
 
 
@@ -130,16 +125,15 @@ public class RatesActivity extends AppCompatActivity {
         setClicklistenerKopSpinner();
         setClicklistenerRubSpinnerTwoRate();
 
+        summPrice = resultPriceRub + ((float)resultPriceKopeck/100);
+        Log.d(LOG_TAG, "result price rub: " + summPrice);
+        summPriceTwoRate = resultPriceRubTwo + ((float)resultPriceKopeckTwo/100);
+        Log.d(LOG_TAG, "result price rub two: " + summPriceTwoRate);
+        checked = ((CheckBox)findViewById(R.id.checkBox)).isChecked();
+        Log.d(LOG_TAG, "is cheked: " + checked);
 
     }
 
-    public int getResultTimeYearsTwoRate() {
-        return resultTimeYearsTwoRate;
-    }
-
-    public int getResultTimeYears() {
-        return resultTimeYears;
-    }
 
 
     // адаптер для спинера с рублями
@@ -210,15 +204,14 @@ public class RatesActivity extends AppCompatActivity {
                 try {
 
                     resultTimeYears = selected3 * 360;
-                    Log.d(LOG_TAG, "resultTimeYear: " + resultTimeYears);
+
                 } catch (NullPointerException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
+
                 }
 
                 textView.setText(String.valueOf(resultTimeYears));
-                Log.d(LOG_TAG, "itemClick: position = " + position + ", id = "
-                        + id);
+
             }
 
             @Override
@@ -236,9 +229,8 @@ public class RatesActivity extends AppCompatActivity {
         spinnerRatesTwoHour.setEnabled(checked);
         }
 
-    public boolean isChecked() {
-        return checked = ((CheckBox)findViewById(R.id.checkBox)).isChecked();
-    }
+
+
 
     public void setClicklistenerTwoRatesSpinner() {
         spinnerRatesTwoHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -249,18 +241,17 @@ public class RatesActivity extends AppCompatActivity {
                 try {
 
                     resultTimeYearsTwoRate = selected3TwoRate * 360;
-                    Log.d(LOG_TAG, "resultTime2Rate: " + resultTimeYearsTwoRate);
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
+
                 }
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -274,17 +265,15 @@ public class RatesActivity extends AppCompatActivity {
                 try {
 
                     resultPriceRub = selectedRubRateOne;
-                    Log.d(LOG_TAG, "resultPriceRub: " + resultPriceRub);
+
                 } catch (NullPointerException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -301,23 +290,17 @@ public class RatesActivity extends AppCompatActivity {
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
                 }
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
 
-
-    public float getSummPrice() { // объеденяем рубли и копейки в одну сумму
-        return resultPriceRub + ((float)resultPriceKopeck/100);
-    }
 
     public void setClicklistenerRubSpinnerTwoRate() {
         spinnerRatesTwoRub.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -331,14 +314,12 @@ public class RatesActivity extends AppCompatActivity {
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
                 }
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -355,21 +336,32 @@ public class RatesActivity extends AppCompatActivity {
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "что то не так", Toast.LENGTH_SHORT).show();
                 }
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public float getSummPriceTwoRate() { // объеденяем рубли и копейки в одну сумму
-        return resultPriceRubTwo + ((float)resultPriceKopeckTwo/100);
+    public void setClicklistenerPercentSpinner() {
+        spinnerPercent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                percent = (int) spinnerPercent.getSelectedItem();
+                Log.d(LOG_TAG, "percent: " + percent);// проценты из раскрывающегося списка по позиции
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
+
 
     View.OnTouchListener activitySwiped = new OnSwipeTouchListener(this) {
         public boolean onSwipeRight() {
@@ -380,6 +372,12 @@ public class RatesActivity extends AppCompatActivity {
 
         public boolean onSwipeLeft() {
             Intent intent = new Intent(RatesActivity.this, LampInfoActivity.class);
+            intent.putExtra("percent", percent);
+            intent.putExtra("dataYears", resultTimeYears);
+            intent.putExtra("dataYearsTwo", resultTimeYearsTwoRate);
+            intent.putExtra("resultPriceRate1", summPrice);
+            intent.putExtra("resultPriceRate2", summPriceTwoRate);
+            intent.putExtra("checked", checked);
             startActivity(intent);
 
             return true;
@@ -431,6 +429,12 @@ public class RatesActivity extends AppCompatActivity {
     // переход на активити с вводом данных ламп
     public void onClickForward(View view) {
         Intent intent = new Intent(RatesActivity.this, LampInfoActivity.class);
+        intent.putExtra("percent", percent);
+        intent.putExtra("dataYears", resultTimeYears);
+        intent.putExtra("dataYearsTwo", resultTimeYearsTwoRate);
+        intent.putExtra("resultPriceRate1", summPrice);
+        intent.putExtra("resultPriceRate2", summPriceTwoRate);
+        intent.putExtra("checked", checked);
         startActivity(intent);
     }
 
