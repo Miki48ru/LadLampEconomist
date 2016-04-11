@@ -282,23 +282,25 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/rates_ago"
-            android:layout_width="150dp"
+            android:id="@+id/btn_rates_ago"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rates_ago_text_button"
+            android:text="@string/btn_lamp_update"
             android:layout_below="@id/last_layout"
             android:padding="15dp"
-            android:onClick="onClickAgo"/>
+            android:onClick="onClickLampUpdate"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/forward_calculation"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lamp_forward_text"
+            android:text="@string/btn_new_info"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:padding="@dimen/activity_horizontal_margin"
-            android:onClick="onClickForward"/>
+            android:onClick="onClickNewInfo"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 </LinearLayout>
