@@ -30,20 +30,26 @@ public class LampInfoActivity extends AppCompatActivity {
     private static List<Integer> listPriceLed = new ArrayList<>(); // спиннер цены лед лампы
 
 
-    private int baseResult = RatesActivity.getInstance().getResultTimeYears(); // переменная со значением времени из активности с расчетом по тарифам
+    private int baseResult; //  переменная со значением времени из активности с расчетом по тарифам
 
-    private int baseResultTwoRate =  RatesActivity.getInstance().getResultTimeYearsTwoRate();
+    private int baseResultTwoRate;
 
-    private float summPriceRate1 =  RatesActivity.getInstance().getSummPrice(); // цена по тарифу 1
+    private double summPriceRate1; // цена по тарифу 1
 
-    private float summPriceRate2 = RatesActivity.getInstance().getSummPriceTwoRate(); // цена по тарифу 2
+    private double summPriceRate2;  // цена по тарифу 2
 
-    private boolean enableCheckTwoRate = RatesActivity.getInstance().isChecked(); // стоит галочка тарифа 2 или не стоит
+    private boolean enableCheckTwoRate;  // стоит галочка тарифа 2 или не стоит
+
+    private int percent;
 
     private int selectedPower;
     private double resultPrice;
     private double watt = 1000.0;
     private  double resultPriceTwoRate;
+    private int changeLamp;
+    private int priceLamp;
+    private int priceLed;
+
 
     private int selectedPowerLed;
     private double resultPriceLed;
@@ -112,7 +118,18 @@ public class LampInfoActivity extends AppCompatActivity {
 
         setClicklistenerPriceRatesSpinner();
         setClicklistenerLedSpinner();
+        setClicklistenerChangeSpinner();
+        setClicklistenerPriceLampSpinner();
+        setClicklistenerPriceLedSpinner();
 
+        baseResult = getIntent().getIntExtra("dataYears", 0);
+        Log.d(LOG_TAG, "putExtra dataYears: " + baseResult);
+        baseResultTwoRate = getIntent().getIntExtra("dataYearsTwo", 0);
+        Log.d(LOG_TAG, "putExtra dataYearsTwo: " + baseResultTwoRate);
+        summPriceRate1 = getIntent().getDoubleExtra("resultPriceRate1", 0);
+        summPriceRate2 = getIntent().getDoubleExtra("resultPriceRate2", 0);
+        enableCheckTwoRate = getIntent().getBooleanExtra("checked", true);
+        percent = getIntent().getIntExtra("percent", 0);
     }
 
 
@@ -122,10 +139,13 @@ public class LampInfoActivity extends AppCompatActivity {
                                        int position, long id) {
 
                 selectedPower = (int) spinnerPowerLamp.getSelectedItem();
+                Log.d(LOG_TAG, "power: " + selectedPower);
                 try {
 
-                    resultPrice = (double) selectedPower * baseResult / watt * summPriceRate1; // мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
+                    resultPrice = (double) selectedPower * baseResult / watt * summPriceRate1;
+                    Log.d(LOG_TAG, "result price: " + resultPrice);// мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
                     resultPriceTwoRate = (double) selectedPower * baseResultTwoRate / watt * summPriceRate2;
+                    Log.d(LOG_TAG, "result price2: " + resultPriceTwoRate);
                     // если чекбокс включен, то тариф 2 расчитывается
                     if (enableCheckTwoRate == true) {
 
@@ -156,8 +176,10 @@ public class LampInfoActivity extends AppCompatActivity {
                 selectedPowerLed = (int) spinnerPowerLed.getSelectedItem();
                 try {
 
-                    resultPriceLed = (double) selectedPowerLed * baseResult / watt * summPriceRate1; // мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
+                    resultPriceLed = (double) selectedPowerLed * baseResult / watt * summPriceRate1;
+                    Log.d(LOG_TAG, "result price Led: " + resultPriceLed);// мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
                     resultPriceTwoRateLed = (double) selectedPowerLed * baseResultTwoRate / watt * summPriceRate2;
+                    Log.d(LOG_TAG, "result price Led 2: " + resultPriceTwoRateLed);
                     // если чекбокс включен, то тариф 2 расчитывается
                     if (enableCheckTwoRate == true) {
 
@@ -178,16 +200,83 @@ public class LampInfoActivity extends AppCompatActivity {
         });
     }
 
+    public void setClicklistenerChangeSpinner() {
+        spinnerChangeLamp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                changeLamp = (int) spinnerChangeLamp.getSelectedItem();
+                Log.d(LOG_TAG, "change: " + changeLamp);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    // цена обычной лампочки
+    public void setClicklistenerPriceLampSpinner() {
+        spinnerLampPrice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                priceLamp = (int) spinnerLampPrice.getSelectedItem();
+                Log.d(LOG_TAG, "price Lamp: " + priceLamp);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void setClicklistenerPriceLedSpinner() {
+        spinnerPriceLed.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                priceLed = (int) spinnerPriceLed.getSelectedItem();
+                Log.d(LOG_TAG, "price Led: " + priceLed);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
 
     // метод для свайпа активити
     View.OnTouchListener activitySwiped = new OnSwipeTouchListener(this) {
         public boolean onSwipeRight() {
+
             Intent intent = new Intent(LampInfoActivity.this, RatesActivity.class);
             startActivity(intent);
             return true;
         }
 
         public boolean onSwipeLeft() {
+
+            Intent intent = new Intent(LampInfoActivity.this, SettlementsActivity.class);
+            intent.putExtra("power", selectedPower);
+            intent.putExtra("power", selectedPowerLed);
+            intent.putExtra("percent", percent);
+            intent.putExtra("dataYears", baseResult);
+            intent.putExtra("dataYearsTwo", baseResultTwoRate);
+            intent.putExtra("resultPriceRate1", summPriceRate1);
+            intent.putExtra("resultPriceRate2", summPriceRate2);
+            intent.putExtra("checked", enableCheckTwoRate);
+            intent.putExtra("changeLamp", changeLamp);
+            intent.putExtra("priceLamp", priceLamp);
+            intent.putExtra("priceLed", priceLed);
+            startActivity(intent);
 
             return true;
         }
@@ -263,6 +352,16 @@ public class LampInfoActivity extends AppCompatActivity {
 
     public void onClickForward(View view) {
         Intent intent = new Intent(LampInfoActivity.this, SettlementsActivity.class);
+        intent.putExtra("power", selectedPower);
+        intent.putExtra("percent", percent);
+        intent.putExtra("dataYears", baseResult);
+        intent.putExtra("dataYearsTwo", baseResultTwoRate);
+        intent.putExtra("resultPriceRate1", summPriceRate1);
+        intent.putExtra("resultPriceRate2", summPriceRate2);
+        intent.putExtra("checked", enableCheckTwoRate);
+        intent.putExtra("changeLamp", changeLamp);
+        intent.putExtra("priceLamp", priceLamp);
+        intent.putExtra("priceLed", priceLed);
         startActivity(intent);
     }
 
