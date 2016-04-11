@@ -52,6 +52,8 @@
     <string name="cell_8">За четыре года</string>
     <string name="cell_9">За пять лет</string>
     <string name="last_text">Как видно из таблицы, выигрыш по затратам появляется уже на ___ году использования светодиодных ламп. </string>
+    <string name="btn_lamp_update">обновить данные по лампам</string>
+    <string name="btn_new_info">дополнительная информация</string>
 
 
 </resources>
