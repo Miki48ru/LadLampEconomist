@@ -124,11 +124,11 @@ public class RatesActivity extends AppCompatActivity {
         setClicklistenerRubSpinner();
         setClicklistenerKopSpinner();
         setClicklistenerRubSpinnerTwoRate();
+        setClicklistenerKopSpinnerTwoRate();
+        setClicklistenerPercentSpinner();
 
-        summPrice = resultPriceRub + ((float)resultPriceKopeck/100);
-        Log.d(LOG_TAG, "result price rub: " + summPrice);
-        summPriceTwoRate = resultPriceRubTwo + ((float)resultPriceKopeckTwo/100);
-        Log.d(LOG_TAG, "result price rub two: " + summPriceTwoRate);
+
+
         checked = ((CheckBox)findViewById(R.id.checkBox)).isChecked();
         Log.d(LOG_TAG, "is cheked: " + checked);
 
@@ -143,6 +143,7 @@ public class RatesActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, spinnerOne);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRub.setAdapter(spinnerAdapter);
+        spinnerRub.setSelection(2);
     }
 
     public void adapterSpinnerTwo() {
@@ -151,6 +152,7 @@ public class RatesActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, spinnerTwo);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerKopeck.setAdapter(spinnerAdapter);
+        spinnerKopeck.setSelection(38);
     }
 
     public void adapterSpinnerHours() {
@@ -158,6 +160,7 @@ public class RatesActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, spinnerHours);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHour.setAdapter(spinnerAdapter);
+        spinnerHour.setSelection(1);
 
     }
 
@@ -167,6 +170,7 @@ public class RatesActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, spinner_rates_2_one);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRatesTwoRub.setAdapter(spinnerAdapter);
+        spinnerRatesTwoRub.setSelection(1);
     }
 
     public void adapterSpinnerRates2Two() {
@@ -175,6 +179,7 @@ public class RatesActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, spinner_rates_2_two);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRatesTwoKopeck.setAdapter(spinnerAdapter);
+        spinnerRatesTwoKopeck.setSelection(13);
     }
 
     public void adapterSpinnerRates2Hours() {
@@ -182,6 +187,7 @@ public class RatesActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, spinner_rates_2_hours);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRatesTwoHour.setAdapter(spinnerAdapter);
+        spinnerRatesTwoHour.setSelection(3);
 
     }
     public void adapterSpinnerPercent() {
@@ -189,6 +195,7 @@ public class RatesActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, spinner_percent);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPercent.setAdapter(spinnerAdapter);
+        spinnerPercent.setSelection(15);
 
     }
 
@@ -203,7 +210,7 @@ public class RatesActivity extends AppCompatActivity {
                 selected3 = (int) spinnerHour.getSelectedItem();
                 try {
 
-                    resultTimeYears = selected3 * 360;
+                    resultTimeYears = selected3 * 365;
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
@@ -216,7 +223,7 @@ public class RatesActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(), "Нужно выбрать пункт", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -240,7 +247,7 @@ public class RatesActivity extends AppCompatActivity {
                 selected3TwoRate = (int) spinnerRatesTwoHour.getSelectedItem();
                 try {
 
-                    resultTimeYearsTwoRate = selected3TwoRate * 360;
+                    resultTimeYearsTwoRate = selected3TwoRate * 365;
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
@@ -288,6 +295,9 @@ public class RatesActivity extends AppCompatActivity {
 
                     resultPriceKopeck = selectedKopRateOne;
 
+                    summPrice = resultPriceRub + ((float)resultPriceKopeck/100);
+                    Log.d(LOG_TAG, "result price rub: " + summPrice);
+
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                 }
@@ -334,6 +344,10 @@ public class RatesActivity extends AppCompatActivity {
 
                     resultPriceKopeckTwo = selectedKopRateTwo;
 
+                    summPriceTwoRate = resultPriceRubTwo + ((float)resultPriceKopeckTwo/100);
+                    Log.d(LOG_TAG, "result price rub two: " + summPriceTwoRate);
+
+
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                 }
@@ -370,7 +384,12 @@ public class RatesActivity extends AppCompatActivity {
             return true;
         }
 
+
+
+
         public boolean onSwipeLeft() {
+
+
             Intent intent = new Intent(RatesActivity.this, LampInfoActivity.class);
             intent.putExtra("percent", percent);
             intent.putExtra("dataYears", resultTimeYears);
@@ -428,12 +447,18 @@ public class RatesActivity extends AppCompatActivity {
     }
     // переход на активити с вводом данных ламп
     public void onClickForward(View view) {
+        summPrice = resultPriceRub + ((float)resultPriceKopeck/100);
+        Log.d(LOG_TAG, "result price rub: " + summPrice);
+
+        summPriceTwoRate = resultPriceRubTwo + ((float)resultPriceKopeckTwo/100);
+        Log.d(LOG_TAG, "result price rub two: " + summPriceTwoRate);
+
         Intent intent = new Intent(RatesActivity.this, LampInfoActivity.class);
         intent.putExtra("percent", percent);
         intent.putExtra("dataYears", resultTimeYears);
         intent.putExtra("dataYearsTwo", resultTimeYearsTwoRate);
-        intent.putExtra("resultPriceRate1", summPrice);
-        intent.putExtra("resultPriceRate2", summPriceTwoRate);
+        intent.putExtra("resultPrice1", summPrice);
+        intent.putExtra("resultPrice2", summPriceTwoRate);
         intent.putExtra("checked", checked);
         startActivity(intent);
     }
