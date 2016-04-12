@@ -20,7 +20,7 @@ import java.util.List;
 
 public class LampInfoActivity extends AppCompatActivity {
 
-    final String LOG_TAG = "myLogs";
+   final String LOG_TAG = "myLogs";
 
     private static List<Integer> listPower = new ArrayList<>(); // массив мощности лампы
     private static List<Integer> listPrice = new ArrayList<>();
@@ -34,26 +34,27 @@ public class LampInfoActivity extends AppCompatActivity {
 
     private int baseResultTwoRate;
 
-    private double summPriceRate1; // цена по тарифу 1
+    private float summPriceRate1; // цена по тарифу 1
 
-    private double summPriceRate2;  // цена по тарифу 2
+    private float summPriceRate2;  // цена по тарифу 2
 
     private boolean enableCheckTwoRate;  // стоит галочка тарифа 2 или не стоит
 
-    private int percent;
+    private int percentBase;
+
 
     private int selectedPower;
-    private double resultPrice;
+    private float resultPrice;
     private double watt = 1000.0;
-    private  double resultPriceTwoRate;
+    private float resultPriceTwoRate;
     private int changeLamp;
     private int priceLamp;
     private int priceLed;
 
 
     private int selectedPowerLed;
-    private double resultPriceLed;
-    private  double resultPriceTwoRateLed;
+    private float resultPriceLed;
+    private float resultPriceTwoRateLed;
 
 
 
@@ -112,6 +113,7 @@ public class LampInfoActivity extends AppCompatActivity {
         adapterSpinnerChange();
 
         spinnerPowerLed = (Spinner)findViewById(R.id.spinner_power_led);
+
         spinnerPriceLed = (Spinner)findViewById(R.id.spinner_lamp_price_led);
 
         adapterSpinnerPowerAndPriceLed();
@@ -122,14 +124,22 @@ public class LampInfoActivity extends AppCompatActivity {
         setClicklistenerPriceLampSpinner();
         setClicklistenerPriceLedSpinner();
 
-        baseResult = getIntent().getIntExtra("dataYears", 0);
+        baseResult = getIntent().getIntExtra("dataYears", 1);
         Log.d(LOG_TAG, "putExtra dataYears: " + baseResult);
-        baseResultTwoRate = getIntent().getIntExtra("dataYearsTwo", 0);
+
+        baseResultTwoRate = getIntent().getIntExtra("dataYearsTwo", 1);
         Log.d(LOG_TAG, "putExtra dataYearsTwo: " + baseResultTwoRate);
-        summPriceRate1 = getIntent().getDoubleExtra("resultPriceRate1", 0);
-        summPriceRate2 = getIntent().getDoubleExtra("resultPriceRate2", 0);
+
+        summPriceRate1 = getIntent().getFloatExtra("resultPrice1", 1);
+        Log.d(LOG_TAG, "summPrice1 getExtra: " + summPriceRate1);
+
+        summPriceRate2 = getIntent().getFloatExtra("resultPrice2", 1);
+        Log.d(LOG_TAG, "summPrice2 getExtra: " + summPriceRate2);
+
         enableCheckTwoRate = getIntent().getBooleanExtra("checked", true);
-        percent = getIntent().getIntExtra("percent", 0);
+
+        percentBase = getIntent().getIntExtra("percent", 1);
+        Log.d(LOG_TAG, "percent onCreate: " + percentBase);
     }
 
 
@@ -142,9 +152,9 @@ public class LampInfoActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, "power: " + selectedPower);
                 try {
 
-                    resultPrice = (double) selectedPower * baseResult / watt * summPriceRate1;
+                    resultPrice = (float) (selectedPower * baseResult / watt * summPriceRate1);
                     Log.d(LOG_TAG, "result price: " + resultPrice);// мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
-                    resultPriceTwoRate = (double) selectedPower * baseResultTwoRate / watt * summPriceRate2;
+                    resultPriceTwoRate = (float) (selectedPower * baseResultTwoRate / watt * summPriceRate2);
                     Log.d(LOG_TAG, "result price2: " + resultPriceTwoRate);
                     // если чекбокс включен, то тариф 2 расчитывается
                     if (enableCheckTwoRate == true) {
@@ -176,9 +186,10 @@ public class LampInfoActivity extends AppCompatActivity {
                 selectedPowerLed = (int) spinnerPowerLed.getSelectedItem();
                 try {
 
-                    resultPriceLed = (double) selectedPowerLed * baseResult / watt * summPriceRate1;
-                    Log.d(LOG_TAG, "result price Led: " + resultPriceLed);// мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
-                    resultPriceTwoRateLed = (double) selectedPowerLed * baseResultTwoRate / watt * summPriceRate2;
+                    resultPriceLed = (float) (selectedPowerLed * baseResult / watt * summPriceRate1);
+                    Log.d(LOG_TAG, "LampInfoActivity: " + "result price Led: " + resultPriceLed + " selectedPowerLed " + selectedPowerLed +
+                            " baseResult " + baseResult + " summPriceRate1 " + summPriceRate1);// мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
+                    resultPriceTwoRateLed = (float) (selectedPowerLed * baseResultTwoRate / watt * summPriceRate2);
                     Log.d(LOG_TAG, "result price Led 2: " + resultPriceTwoRateLed);
                     // если чекбокс включен, то тариф 2 расчитывается
                     if (enableCheckTwoRate == true) {
@@ -266,8 +277,8 @@ public class LampInfoActivity extends AppCompatActivity {
 
             Intent intent = new Intent(LampInfoActivity.this, SettlementsActivity.class);
             intent.putExtra("power", selectedPower);
-            intent.putExtra("power", selectedPowerLed);
-            intent.putExtra("percent", percent);
+            intent.putExtra("powerLed", selectedPowerLed);
+            intent.putExtra("percent", percentBase);
             intent.putExtra("dataYears", baseResult);
             intent.putExtra("dataYearsTwo", baseResultTwoRate);
             intent.putExtra("resultPriceRate1", summPriceRate1);
@@ -353,7 +364,8 @@ public class LampInfoActivity extends AppCompatActivity {
     public void onClickForward(View view) {
         Intent intent = new Intent(LampInfoActivity.this, SettlementsActivity.class);
         intent.putExtra("power", selectedPower);
-        intent.putExtra("percent", percent);
+        intent.putExtra("powerLed", selectedPowerLed);
+        intent.putExtra("percentBase", percentBase);
         intent.putExtra("dataYears", baseResult);
         intent.putExtra("dataYearsTwo", baseResultTwoRate);
         intent.putExtra("resultPriceRate1", summPriceRate1);
