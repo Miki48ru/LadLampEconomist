@@ -2,22 +2,31 @@ package ru.example.mike.ladlampeconomist;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 public class SettlementsActivity extends AppCompatActivity {
 
+    final String LOG_TAG = "myLogs";
+
     private int percentPriceUp;
     private int powerLamp;
+    private int powerLed;
     private int timeYearsRate1;
     private int timeYearsRate2;
-    private double resultPriceRate1;
-    private double resultPriceRate2;
+    private float resultPriceRateOne;
+    private float resultPriceRateTwo;
     private int watt = 1000;
     private boolean isChecked;
     private int changeLamp;
     private int priceLamp;
     private int priceLed;
+    private float resultPriceLamp;
+    private float resultPriceLampNotRate2;
+
+    private float resultPriceLed;
+    private float resultPriceLedNotRate2;
 
 
     private TextView textView1;
@@ -43,12 +52,14 @@ public class SettlementsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settlements);
 
-        percentPriceUp = getIntent().getIntExtra("percent", 1);
+        percentPriceUp = getIntent().getIntExtra("percentBase", 1);
+        Log.d(LOG_TAG, "putExtra persentPriceUp: " + percentPriceUp);
         powerLamp = getIntent().getIntExtra("power", 1);
+        powerLed = getIntent().getIntExtra("powerLed", 1);
         timeYearsRate1 = getIntent().getIntExtra("dataYears", 1);
         timeYearsRate2 = getIntent().getIntExtra("dataYearsTwo", 1);
-        resultPriceRate1 = getIntent().getDoubleExtra("resultPriceRate1", 1);
-        resultPriceRate2 = getIntent().getDoubleExtra("resultPriceRate2", 1);
+        resultPriceRateOne = getIntent().getFloatExtra("resultPriceRate1", 1);
+        resultPriceRateTwo = getIntent().getFloatExtra("resultPriceRate2", 1);
         isChecked = getIntent().getBooleanExtra("checked", true);
         changeLamp = getIntent().getIntExtra("changeLamp", 1);
         priceLamp = getIntent().getIntExtra("priceLamp", 1);
@@ -72,9 +83,36 @@ public class SettlementsActivity extends AppCompatActivity {
 
 
         if (isChecked == true) {
-            textView1.setText(String.valueOf(Math.round((powerLamp * timeYearsRate1 * percentPriceUp / watt * resultPriceRate1) + (powerLamp * timeYearsRate2 * percentPriceUp / watt * resultPriceRate2) + (changeLamp * priceLamp)) + " руб.")); //Math.round - округление значения
+            resultPriceLamp = Math.round((powerLamp * timeYearsRate1 * percentPriceUp / watt * resultPriceRateOne) +
+                    (powerLamp * timeYearsRate2 * percentPriceUp / watt * resultPriceRateTwo) +
+                    (changeLamp * priceLamp)); //Math.round - округление значения
+
+            resultPriceLampNotRate2 = Math.round((powerLamp * timeYearsRate1 * percentPriceUp / watt * resultPriceRateOne) +
+                    (changeLamp * priceLed));
+
+            resultPriceLed = Math.round((powerLed * timeYearsRate1 * percentPriceUp / watt * resultPriceRateOne) +
+                    (powerLed * timeYearsRate2 * percentPriceUp / watt * resultPriceRateTwo) + priceLamp);
+
+            resultPriceLedNotRate2 = Math.round((powerLed * timeYearsRate1 * percentPriceUp / watt * resultPriceRateOne) + priceLed);
+
+            textView1.setText(String.valueOf(resultPriceLamp + " руб."));
+
+            Log.d(LOG_TAG, "powerLamp: " + powerLamp + " timeYearsRate1: " + timeYearsRate1 + " percentPriceUp "
+                    + percentPriceUp + " watt: " + watt + " resultPriceRate1: " + resultPriceRateOne + " powerLamp: " + powerLamp
+                    + " timeYearsRate2: " + timeYearsRate2 + " percentPriceUp: " + percentPriceUp + " resultPriceRate2: " + resultPriceRateTwo +
+                    " changeLamp " + changeLamp + " priceLamp " + priceLamp);
+
+            textView2.setText(String.valueOf(resultPriceLed + " руб."));
+
+            textView3.setText(String.valueOf(resultPriceLamp - resultPriceLed + " руб."));
+
+
         } else if (isChecked == false) {
-            textView1.setText(String.valueOf(Math.round((powerLamp * timeYearsRate1 * percentPriceUp / watt * resultPriceRate1) + (changeLamp * priceLamp)) + " руб."));
+            textView1.setText(String.valueOf(resultPriceLampNotRate2 + " руб."));
+
+            textView2.setText(String.valueOf(resultPriceLedNotRate2 + " руб."));
+
+            textView3.setText(String.valueOf(resultPriceLampNotRate2 - resultPriceLedNotRate2 + " руб."));
         }
 
     }
