@@ -19,52 +19,62 @@
         android:layout_height="wrap_content"
         android:text="@string/text_one_settlments_activity"/>
 
-    <GridLayout
+    <TableLayout
         android:layout_marginTop="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_border"
-        android:columnCount="4"
-        android:rowCount="6"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:shrinkColumns="*"
+        android:stretchColumns="*">
+
+        <TableRow>
+            <TextView
+                android:text="@string/cell_1"
+                android:background="@drawable/custom_border"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:maxWidth="80dp">
+            </TextView>
+            <TextView
+                android:text="@string/cell_2"
+                android:background="@drawable/custom_border"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:maxWidth="80dp">
+            </TextView>
+            <TextView
+                android:text="@string/cell_3"
+                android:background="@drawable/custom_border"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:maxWidth="80dp">
+            </TextView>
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:text="@string/cell_4"
+                android:background="@drawable/custom_border"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:maxWidth="80dp">
+            </TextView>
+
+        </TableRow>
+
+        <TableRow>
 
         <TextView
-            android:text="@string/cell_1"
-            android:background="@drawable/custom_border"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:maxWidth="80dp">
-        </TextView>
-        <TextView
-            android:text="@string/cell_2"
-            android:background="@drawable/custom_border"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:maxWidth="80dp">
-        </TextView>
-        <TextView
-            android:text="@string/cell_3"
-            android:background="@drawable/custom_border"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:maxWidth="80dp">
-        </TextView>
-        <TextView
-            android:text="@string/cell_4"
-            android:background="@drawable/custom_border"
-            android:paddingTop="3dp"
-            android:paddingBottom="3dp"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:maxWidth="80dp">
-        </TextView>
-        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:text="@string/cell_5"
             android:background="@drawable/custom_border"
             android:paddingTop="3dp"
@@ -75,6 +85,8 @@
         </TextView>
 
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_1_row_2"
             android:text=""
             android:background="@drawable/custom_border"
@@ -86,6 +98,8 @@
             android:textSize="15dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_2_row_2"
             android:text=""
             android:background="@drawable/custom_border"
@@ -97,6 +111,8 @@
             android:textSize="15dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_3_row_2"
             android:text=""
             android:background="@drawable/custom_border"
@@ -107,8 +123,12 @@
             android:maxWidth="80dp"
             android:textSize="15dp">
         </TextView>
+        </TableRow>
 
+        <TableRow>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:text="@string/cell_6"
             android:background="@drawable/custom_border"
             android:paddingTop="3dp"
@@ -118,6 +138,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_2_row_3"
             android:text=""
             android:background="@drawable/custom_border"
@@ -128,6 +150,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_3_row_3"
             android:text=""
             android:background="@drawable/custom_border"
@@ -138,6 +162,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_4_row_3"
             android:text=""
             android:background="@drawable/custom_border"
@@ -147,8 +173,12 @@
             android:paddingRight="3dp"
             android:maxWidth="80dp">
         </TextView>
+        </TableRow>
 
+        <TableRow>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:text="@string/cell_7"
             android:background="@drawable/custom_border"
             android:paddingTop="3dp"
@@ -158,6 +188,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_2_row_4"
             android:text=""
             android:background="@drawable/custom_border"
@@ -169,6 +201,8 @@
         </TextView>
 
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_3_row_4"
             android:text=""
             android:background="@drawable/custom_border"
@@ -179,6 +213,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_4_row_4"
             android:text=""
             android:background="@drawable/custom_border"
@@ -188,8 +224,13 @@
             android:paddingRight="3dp"
             android:maxWidth="80dp">
         </TextView>
+        </TableRow>
+
+        <TableRow>
 
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:text="@string/cell_8"
             android:background="@drawable/custom_border"
             android:paddingTop="3dp"
@@ -199,6 +240,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_2_row_5"
             android:text=""
             android:background="@drawable/custom_border"
@@ -209,6 +252,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_3_row_5"
             android:text=""
             android:background="@drawable/custom_border"
@@ -219,6 +264,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_4_row_5"
             android:text=""
             android:background="@drawable/custom_border"
@@ -229,7 +276,13 @@
             android:maxWidth="80dp">
         </TextView>
 
+        </TableRow>
+
+        <TableRow>
+
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:text="@string/cell_9"
             android:background="@drawable/custom_border"
             android:paddingTop="3dp"
@@ -239,6 +292,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_2_row_6"
             android:text=""
             android:background="@drawable/custom_border"
@@ -249,6 +304,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_3_row_6"
             android:text=""
             android:background="@drawable/custom_border"
@@ -259,6 +316,8 @@
             android:maxWidth="80dp">
         </TextView>
         <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             android:id="@+id/cell_4_row_6"
             android:text=""
             android:background="@drawable/custom_border"
@@ -268,8 +327,9 @@
             android:paddingRight="3dp"
             android:maxWidth="80dp">
         </TextView>
+        </TableRow>
 
-    </GridLayout>
+    </TableLayout>
 
     <TextView
         android:id="@+id/last_text"
