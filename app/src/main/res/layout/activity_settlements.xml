@@ -82,7 +82,8 @@
             android:paddingBottom="3dp"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:maxWidth="80dp">
+            android:maxWidth="80dp"
+            android:textSize="15dp">
         </TextView>
         <TextView
             android:id="@+id/cell_2_row_2"
@@ -92,7 +93,8 @@
             android:paddingBottom="3dp"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:maxWidth="80dp">
+            android:maxWidth="80dp"
+            android:textSize="15dp">
         </TextView>
         <TextView
             android:id="@+id/cell_3_row_2"
@@ -102,7 +104,8 @@
             android:paddingBottom="3dp"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:maxWidth="80dp">
+            android:maxWidth="80dp"
+            android:textSize="15dp">
         </TextView>
 
         <TextView
