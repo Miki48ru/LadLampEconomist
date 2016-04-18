@@ -17,7 +17,7 @@
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="ru.example.mike.ladlampeconomist.RatesActivity">
+    tools:context="ru.example.mike.ledlampeconomist.RatesActivity">
 
     <TableRow
         android:id="@+id/tableRow1"
