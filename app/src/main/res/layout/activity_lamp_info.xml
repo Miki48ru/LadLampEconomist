@@ -16,7 +16,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:id="@+id/lamp_info_activity"
-    tools:context="ru.example.mike.ladlampeconomist.LampInfoActivity">
+    tools:context="ru.example.mike.ledlampeconomist.LampInfoActivity">
 
     <LinearLayout
         android:id="@+id/linear_lamp_layout"
