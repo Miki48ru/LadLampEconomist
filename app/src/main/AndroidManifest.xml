@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.example.mike.ladlampeconomist">
+    package="ru.example.mike.ledlampeconomist">
 
 
     <application
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="ru.example.mike.ledlampeconomist.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.MAIN" />
@@ -19,14 +19,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RatesActivity"
+            android:name="ru.example.mike.ledlampeconomist.RatesActivity"
             android:label="@string/rates_title"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LampInfoActivity"
+            android:name="ru.example.mike.ledlampeconomist.LampInfoActivity"
             android:label="@string/lamp_title"
             android:screenOrientation="portrait" />
-        <activity android:name=".SettlementsActivity"
+        <activity android:name="ru.example.mike.ledlampeconomist.SettlementsActivity"
             android:label="@string/settlements_activity"
             android:screenOrientation="portrait">
 
