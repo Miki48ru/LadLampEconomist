@@ -11,7 +11,7 @@
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="ru.example.mike.ladlampeconomist.SettlementsActivity">
+    tools:context="ru.example.mike.ledlampeconomist.SettlementsActivity">
 
 
     <TextView
