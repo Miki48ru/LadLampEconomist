@@ -1,4 +1,4 @@
-package ru.example.mike.ladlampeconomist;
+package ru.example.mike.ledlampeconomist;
 
 import org.junit.Test;
 
