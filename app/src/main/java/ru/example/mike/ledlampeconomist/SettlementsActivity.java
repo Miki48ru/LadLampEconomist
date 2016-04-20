@@ -82,28 +82,29 @@ public class SettlementsActivity extends AppCompatActivity {
         textView13 = (TextView)findViewById(ru.example.mike.ledlampeconomist.R.id.cell_3_row_6);
         textView13 = (TextView)findViewById(ru.example.mike.ledlampeconomist.R.id.cell_4_row_6);
 
-        resultPriceLamp = Math.round((powerLamp * timeYearsRate1 * percentPriceUp / watt * resultPriceRateOne) +
-                (powerLamp * timeYearsRate2 * percentPriceUp / watt * resultPriceRateTwo) +
+        resultPriceLamp = Math.round(((float) powerLamp / watt * timeYearsRate1 * resultPriceRateOne) +
+                ((float) powerLamp / watt * timeYearsRate2 * resultPriceRateTwo) +
                 (changeLamp * priceLamp)); //Math.round - округление значения
-
-        resultPriceLampNotRate2 = Math.round((powerLamp * timeYearsRate1 * percentPriceUp / watt * resultPriceRateOne) +
-                (changeLamp * priceLed));
-
-        resultPriceLed = Math.round((powerLed * timeYearsRate1 * percentPriceUp / watt * resultPriceRateOne) +
-                (powerLed * timeYearsRate2 * percentPriceUp / watt * resultPriceRateTwo) + priceLamp);
-
-        resultPriceLedNotRate2 = Math.round((powerLed * timeYearsRate1 * percentPriceUp / watt * resultPriceRateOne) + priceLed);
+        Log.d(LOG_TAG, "powerLamp: " + powerLamp + "watt: " + watt + " timeYearsRate1: " + timeYearsRate1 + " resultPriceRate1: " + resultPriceRateOne + " powerLamp: " + powerLamp
+                + " timeYearsRate2: " + timeYearsRate2 + " resultPriceRate2: " + resultPriceRateTwo +
+                " changeLamp " + changeLamp + " priceLamp " + priceLamp);
+        Log.d(LOG_TAG, "Итого: " + resultPriceLamp);
 
 
-        if (isChecked == false) {
+        resultPriceLampNotRate2 = Math.round(((float) powerLamp / watt * timeYearsRate1 * resultPriceRateOne) +
+                (changeLamp * priceLamp));
+
+        resultPriceLed = Math.round(((float) powerLed / watt * timeYearsRate1 * resultPriceRateOne) +
+                ((float) powerLed / watt * timeYearsRate2 * resultPriceRateTwo) + priceLed);
+
+        resultPriceLedNotRate2 = Math.round(((float) powerLed / watt * timeYearsRate1 * resultPriceRateOne) + priceLed);
+
+
+        if (isChecked == true) {
 
 
             textView1.setText(String.valueOf(resultPriceLamp + " руб."));
 
-            Log.d(LOG_TAG, "powerLamp: " + powerLamp + " timeYearsRate1: " + timeYearsRate1 + " percentPriceUp "
-                    + percentPriceUp + " watt: " + watt + " resultPriceRate1: " + resultPriceRateOne + " powerLamp: " + powerLamp
-                    + " timeYearsRate2: " + timeYearsRate2 + " percentPriceUp: " + percentPriceUp + " resultPriceRate2: " + resultPriceRateTwo +
-                    " changeLamp " + changeLamp + " priceLamp " + priceLamp);
 
             textView2.setText(String.valueOf(resultPriceLed + " руб."));
 
@@ -111,7 +112,7 @@ public class SettlementsActivity extends AppCompatActivity {
 
         }
 
-        if (isChecked == true) {
+        if (isChecked == false) {
             textView1.setText(String.valueOf(resultPriceLampNotRate2 + " руб."));
 
             textView2.setText(String.valueOf(resultPriceLedNotRate2 + " руб."));
